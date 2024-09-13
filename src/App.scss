@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+
+  > .ant-layout {
+    height: 100vh;
+
+    > .ant-layout-content {
+
+      .view {
+        height: 100%;
+        padding: 0.5em;
+      }
+    }
+  }
+
+
+}
