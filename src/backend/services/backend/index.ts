@@ -371,6 +371,30 @@ export class AccessControllerService {
     });
   }
   /**
+   * Get the info by the car number
+   */
+  getInfoByCarNumber(
+    params: {
+      /**  */
+      carNumber: string;
+      /**  */
+      active?: boolean;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/access/info/{car-number}';
+      url = url.replace('{car-number}', params['carNumber'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = { active: params['active'] };
+
+      /** 适配ios13，get请求不允许带body */
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
    * Export the access to .csv by the area id
    */
   exportAccess(
@@ -1648,10 +1672,10 @@ export interface RoomFilter {
 
 export interface PageRoomVO {
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -1683,16 +1707,16 @@ export interface PageRoomVO {
 
 export interface PageableObject {
   /**  */
-  paged?: boolean;
-
-  /**  */
-  unpaged?: boolean;
-
-  /**  */
   pageNumber?: number;
 
   /**  */
   pageSize?: number;
+
+  /**  */
+  paged?: boolean;
+
+  /**  */
+  unpaged?: boolean;
 
   /**  */
   offset?: number;
@@ -1703,10 +1727,10 @@ export interface PageableObject {
 
 export interface SortObject {
   /**  */
-  unsorted?: boolean;
+  sorted?: boolean;
 
   /**  */
-  sorted?: boolean;
+  unsorted?: boolean;
 
   /**  */
   empty?: boolean;
@@ -1785,10 +1809,10 @@ export interface RangeRequest {
 
 export interface PagePaymentVO {
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -2010,10 +2034,10 @@ export interface LogEntryResponse {
 
 export interface PageLogEntryResponse {
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -2081,10 +2105,10 @@ export interface FileVO {
 
 export interface PageFileVO {
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -2586,6 +2610,26 @@ export interface AccountResponse {
 
   /**  */
   description?: string;
+}
+
+export interface InfoByPlateNumber {
+  /**  */
+  ownerName?: string;
+
+  /**  */
+  ownerRooms?: string;
+
+  /**  */
+  phoneNumber?: string;
+
+  /**  */
+  phoneLabel?: string;
+
+  /**  */
+  carNumber?: string;
+
+  /**  */
+  carDescription?: string;
 }
 export enum EnumRoomVOType {
   'FLAT' = 'FLAT',

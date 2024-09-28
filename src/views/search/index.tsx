@@ -1,17 +1,32 @@
 import {useLoading} from "../../hooks/use-loading";
-import {ChangeEvent, useCallback, useEffect, useState} from "react";
-import {AccessInfoVO, AccessService, OwnerVO} from "../../backend/services/backend";
+import {ChangeEvent, useCallback, useEffect, useState, useMemo} from "react";
+import {AccessService, InfoByPlateNumber, OwnerVO} from "../../backend/services/backend";
 import debounce from "lodash/debounce";
 import {Button, Input, Result, Skeleton, Typography} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
+import {SearchOutlined, PhoneOutlined, UserOutlined} from "@ant-design/icons";
 import './styles.scss';
+import {UserIcon} from "../../icons/user";
 
 export const CarSearch = () => {
     const [loading, showLoading, hideLoading] = useLoading();
     const [searchCarNun, setSearchCarNum] = useState("");
-    const [foundOwner, setOwner] = useState<OwnerVO | null>(null);
+    const [foundOwner, setOwner] = useState<InfoByPlateNumber | null>(null);
     const [searchWasPerformed, setSearchWasPerformed, clearSearchPerformed] = useLoading();
 
+
+    const phoneNumberToCall = useMemo(() => {
+        let result = foundOwner?.phoneNumber || '';
+        if (result.startsWith('7')) {
+            result = `+${result}`
+        } else if (result.startsWith('8')) {
+            result = result.substring(1, 20);
+            result = `+7${result}`
+        } else if (result.startsWith('9')) {
+            result = `+7${result}`
+        }
+
+        return result;
+    }, [foundOwner?.phoneNumber]);
     const searchData = useCallback((carNum: string = "") => {
         if (carNum.length < 3) {
             return;
@@ -19,15 +34,14 @@ export const CarSearch = () => {
 
         const searchStr = carNum.replace(/\s/g, '');
         showLoading();
-        AccessService.findByCarNumber({
+        AccessService.getInfoByCarNumber({
             carNumber: searchStr,
             active: true
         })
-            .then((response: AccessInfoVO) => {
+            .then((response: InfoByPlateNumber) => {
                 setSearchWasPerformed();
                 hideLoading();
-                const {owner = null} = response || {};
-                setOwner(owner);
+                setOwner(response);
             })
             .catch(e => {
                 setSearchWasPerformed();
@@ -81,13 +95,27 @@ export const CarSearch = () => {
             </div>
             {loading && <Skeleton active/>}
             {!loading && searchWasPerformed && <div className='search-result'>
-                {!foundOwner?.id ? <Result
+                {!(foundOwner?.ownerName || foundOwner?.phoneNumber) ? <Result
                         status="404"
                         title={`Неопознанное авто "${searchCarNun}"`}
                         subTitle={`Не удалось найти владельца ТС с гос. номером "${searchCarNun}"`}
                     /> :
                     <div className='owner-info'>
-                        {foundOwner?.fullName}
+                        <Typography.Title level={4}>{foundOwner?.carNumber}</Typography.Title>
+                        <div className='car-description'>{foundOwner.carDescription}</div>
+                        <div className='owner'>
+                            {/*<UserIcon/>*/}
+                            <span className='owner-name'>{foundOwner?.ownerName}</span>
+                            <span className='owner-flat'>({foundOwner?.ownerRooms})</span>
+                        </div>
+                        <div className='phone-info'>
+                            {/*<PhoneOutlined/>*/}
+                            {phoneNumberToCall.startsWith('+7') ? <a className="phone"
+                                                                     href={`tel:${phoneNumberToCall}`}>{phoneNumberToCall}</a> : phoneNumberToCall}
+
+                            {/*<span className={'phone-number'}>{foundOwner?.phoneNumber}</span>*/}
+                            <span className={'phone-label'}>{foundOwner?.phoneLabel}</span>
+                        </div>
                     </div>}
             </div>}
         </div>
