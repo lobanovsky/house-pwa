@@ -1,45 +1,37 @@
-import React from 'react';
+import React from 'react';import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {App as AppProvider, Button, ConfigProvider, Layout} from "antd";
 import ruRU from "antd/locale/ru_RU";
-import {BrowserRouter, Link, Navigate, Route, Routes} from "react-router-dom";
-
 import './backend/axios';
-import Buildings from "./views/buildings";
+import NotificationsProvider from "./global/NotificationsProvider";
+import {CarSearch} from "./views/search";
 import './App.scss';
+
+
 
 function App() {
     return (
         <ConfigProvider locale={ruRU}>
             <AppProvider>
+                <NotificationsProvider/>
                 <div className="App">
                     <BrowserRouter>
                         <Layout>
                             <Layout.Content>
-                                <Link to='/home'><Button type='link'>На главную</Button></Link>
                                 <Routes>
                                     <Route
-                                        path='/buildings'
-                                        element={<Buildings/>}
-                                    />
-                                    <Route
-                                        path='/home'
-                                        element={<div className='home view'>
-                                            Главная страница
-                                            <div>
-                                                <Link to='/buildings'><Button>Посмотреть здания</Button></Link>
-                                            </div>
-                                        </div>}
+                                        index
+                                        path='/search'
+                                        element={<CarSearch/>}
                                     />
                                     <Route
                                         path='*'
                                         element={<Navigate
                                             replace
-                                            to='/home'
+                                            to='/search'
                                         />}
                                     />
                                 </Routes>
                             </Layout.Content>
-
                         </Layout>
                     </BrowserRouter>
                 </div>

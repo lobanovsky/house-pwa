@@ -1,0 +1,27 @@
+.cars-search.view {
+  text-align: start;
+  max-width: 600px;
+
+  h4 {
+    margin-top: 0;
+  }
+
+  .search-form {
+    //max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+  }
+
+  .search-result {
+    //max-width: 600px;
+    padding: 0.5em;
+    margin-top: 1em;
+    text-align: center;
+
+    span.not-found {
+      color: gray;
+    }
+  }
+}
