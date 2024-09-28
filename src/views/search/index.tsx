@@ -6,6 +6,7 @@ import {Button, Input, Result, Skeleton, Typography} from "antd";
 import {SearchOutlined, PhoneOutlined, UserOutlined} from "@ant-design/icons";
 import './styles.scss';
 import {UserIcon} from "../../icons/user";
+import {CarIcon} from "../../icons/car";
 
 export const CarSearch = () => {
     const [loading, showLoading, hideLoading] = useLoading();
@@ -102,14 +103,14 @@ export const CarSearch = () => {
                     /> :
                     <div className='owner-info'>
                         <div className='car-info'>
+                            <CarIcon className='car-icon' />
                             <Typography.Title level={4}>{foundOwner?.carNumber}</Typography.Title>
                             <span className='car-description'>{foundOwner.carDescription}</span>
                         </div>
 
 
                         <div className='owner'>
-                            Собственник:
-                            {/*<UserIcon/>*/}
+                            <UserIcon/>
                             <span className='owner-name'>{foundOwner?.ownerName}</span>
                             <div className='owner-flat'>({foundOwner?.ownerRooms})</div>
                         </div>

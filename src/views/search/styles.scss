@@ -28,10 +28,18 @@
 
     .owner-info {
       .car-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+
         margin-bottom: 1em;
+        .anticon.car-icon {
+          font-size: 26px;
+          margin-right: 0.5em;
+        }
 
         h4 {
-          display: inline-block;
           margin: 0;
           margin-right: 0.5em;
         }
@@ -44,7 +52,7 @@
 
       .owner {
         .anticon.user-icon {
-          font-size: 18px;
+          font-size: 20px;
           margin-right: 0.5em;
         }
 
@@ -74,7 +82,7 @@
         }
 
         .phone-label {
-          margin-left: 6px;
+          margin-left: 1em;
           color: #656565;
         }
       }
