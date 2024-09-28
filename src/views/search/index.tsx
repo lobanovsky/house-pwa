@@ -101,12 +101,17 @@ export const CarSearch = () => {
                         subTitle={`Не удалось найти владельца ТС с гос. номером "${searchCarNun}"`}
                     /> :
                     <div className='owner-info'>
-                        <Typography.Title level={4}>{foundOwner?.carNumber}</Typography.Title>
-                        <div className='car-description'>{foundOwner.carDescription}</div>
+                        <div className='car-info'>
+                            <Typography.Title level={4}>{foundOwner?.carNumber}</Typography.Title>
+                            <span className='car-description'>{foundOwner.carDescription}</span>
+                        </div>
+
+
                         <div className='owner'>
+                            Собственник:
                             {/*<UserIcon/>*/}
                             <span className='owner-name'>{foundOwner?.ownerName}</span>
-                            <span className='owner-flat'>({foundOwner?.ownerRooms})</span>
+                            <div className='owner-flat'>({foundOwner?.ownerRooms})</div>
                         </div>
                         <div className='phone-info'>
                             {/*<PhoneOutlined/>*/}

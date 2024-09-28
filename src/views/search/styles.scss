@@ -27,9 +27,20 @@
     }
 
     .owner-info {
-      .car-description {
+      .car-info {
+        margin-bottom: 1em;
 
+        h4 {
+          display: inline-block;
+          margin: 0;
+          margin-right: 0.5em;
+        }
+
+        .car-description {
+          color: #656565;
+        }
       }
+
 
       .owner {
         .anticon.user-icon {
@@ -38,12 +49,13 @@
         }
 
         .owner-name {
-
+          margin-left: 4px;
         }
 
         .owner-flat {
           font-weight: 500;
-          margin-left: 4px;
+          margin-top: 4px;
+          //margin-left: 4px;
         }
       }
 
