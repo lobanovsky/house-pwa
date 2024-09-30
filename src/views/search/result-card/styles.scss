@@ -1,0 +1,79 @@
+.ant-card.car-search-result {
+  min-width: 300px;
+
+  .ant-card-body {
+    text-align: center;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 12px;
+
+    .car-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+
+      margin-bottom: 1em;
+
+      .anticon.car-icon {
+        font-size: 28px;
+        margin-right: 0.5em;
+      }
+
+      h4 {
+        margin: 0;
+        margin-right: 0.5em;
+      }
+
+      .car-description {
+        color: #656565;
+      }
+    }
+
+    .phone-info {
+      margin-top: 1.5em;
+      font-size: 18px;
+
+      .phone {
+        text-align: center;
+        margin-bottom: 12px;
+        line-height: 28px;
+        font-size: 28px;
+      }
+
+      .phone-label {
+        color: #656565;
+      }
+
+      .tenant {
+        font-size: 15px;
+        color: #d47010;
+      }
+    }
+
+    .owner-info {
+      font-size: 16px;
+      line-height: 18px;
+      margin-top: 1.5em;
+
+      .ant-typography {
+        font-size: 16px;
+      }
+
+      .anticon.user-icon {
+        font-size: 20px;
+        margin-right: 0.5em;
+      }
+
+      .owner-name {
+        margin-left: 4px;
+      }
+
+      .owner-flat {
+        font-weight: 500;
+        margin-top: 4px;
+        //margin-left: 4px;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import {App as AppProvider, Button, ConfigProvider, Layout} from "antd";
+import {App as AppProvider, ConfigProvider, Layout} from "antd";
 import ruRU from "antd/locale/ru_RU";
 import './backend/axios';
 import NotificationsProvider from "./global/NotificationsProvider";
@@ -32,6 +32,9 @@ function App() {
                                     />
                                 </Routes>
                             </Layout.Content>
+                            <Layout.Footer>
+                                © 2020-2024 Бюро Лобановского
+                            </Layout.Footer>
                         </Layout>
                     </BrowserRouter>
                 </div>

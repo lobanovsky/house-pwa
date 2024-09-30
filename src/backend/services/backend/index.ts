@@ -1707,16 +1707,16 @@ export interface PageRoomVO {
 
 export interface PageableObject {
   /**  */
-  pageNumber?: number;
-
-  /**  */
-  pageSize?: number;
+  unpaged?: boolean;
 
   /**  */
   paged?: boolean;
 
   /**  */
-  unpaged?: boolean;
+  pageNumber?: number;
+
+  /**  */
+  pageSize?: number;
 
   /**  */
   offset?: number;
@@ -1727,10 +1727,10 @@ export interface PageableObject {
 
 export interface SortObject {
   /**  */
-  sorted?: boolean;
+  unsorted?: boolean;
 
   /**  */
-  unsorted?: boolean;
+  sorted?: boolean;
 
   /**  */
   empty?: boolean;
@@ -2624,6 +2624,9 @@ export interface InfoByPlateNumber {
 
   /**  */
   phoneLabel?: string;
+
+  /**  */
+  tenant?: boolean;
 
   /**  */
   carNumber?: string;

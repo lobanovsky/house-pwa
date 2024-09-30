@@ -1,6 +1,14 @@
 .cars-search.view {
-  text-align: start;
-  max-width: 600px;
+  &.centered-content {
+    text-align: center;
+  }
+
+  .content {
+    display: inline-block;
+    max-width: 600px;
+  }
+
+  //max-width: 600px;
 
   h4 {
     margin-top: 0;
@@ -8,6 +16,7 @@
 
   .search-form {
     //max-width: 600px;
+    //min-width: 360px;
     display: flex;
     align-items: center;
     gap: 1em;
@@ -15,77 +24,13 @@
   }
 
   .search-result {
-    //max-width: 600px;
-    padding: 0.5em;
-    margin-top: 1em;
-    text-align: center;
-    font-size: 16px;
-    line-height: 18px;
+    width: 100%;
+    margin-top: 2em;
+
 
     span.not-found {
       color: gray;
     }
 
-    .owner-info {
-      .car-info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5em;
-
-        margin-bottom: 1em;
-        .anticon.car-icon {
-          font-size: 26px;
-          margin-right: 0.5em;
-        }
-
-        h4 {
-          margin: 0;
-          margin-right: 0.5em;
-        }
-
-        .car-description {
-          color: #656565;
-        }
-      }
-
-
-      .owner {
-        .anticon.user-icon {
-          font-size: 20px;
-          margin-right: 0.5em;
-        }
-
-        .owner-name {
-          margin-left: 4px;
-        }
-
-        .owner-flat {
-          font-weight: 500;
-          margin-top: 4px;
-          //margin-left: 4px;
-        }
-      }
-
-      .phone-info {
-        margin-top: 1.5em;
-
-        .anticon.anticon-phone {
-          font-size: 20px;
-          margin-right: 0.5em;
-          color: blue;
-        }
-
-
-        .phone-number {
-          font-weight: 500;
-        }
-
-        .phone-label {
-          margin-left: 1em;
-          color: #656565;
-        }
-      }
-    }
   }
 }
