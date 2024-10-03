@@ -2,7 +2,7 @@ import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {Button, Input, Result, Skeleton, Typography} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import debounce from "lodash/debounce";
-import {AccessService, InfoByPlateNumber} from "backend/services/backend";
+import {AccessService, OverviewAccessVO} from "backend/services/backend";
 import {useLoading} from "hooks/use-loading";
 import {CarSearchResultCard} from "./result-card";
 import './styles.scss';
@@ -11,7 +11,7 @@ import './styles.scss';
 export const CarSearch = () => {
     const [loading, showLoading, hideLoading] = useLoading();
     const [searchCarNun, setSearchCarNum] = useState("");
-    const [foundOwner, setOwner] = useState<InfoByPlateNumber | null>(null);
+    const [foundOwner, setOwner] = useState<OverviewAccessVO | null>(null);
     const [searchWasPerformed, setSearchWasPerformed, clearSearchPerformed] = useLoading();
 
     const searchData = useCallback((carNum: string = "") => {
@@ -21,14 +21,17 @@ export const CarSearch = () => {
 
         const searchStr = carNum.replace(/\s/g, '');
         showLoading();
-        AccessService.getInfoByCarNumber({
-            carNumber: searchStr,
+        AccessService.overview({
+            plateNumber: searchStr,
             active: true
         })
-            .then((response: InfoByPlateNumber) => {
+            .then((response: OverviewAccessVO[]) => {
                 setSearchWasPerformed();
                 hideLoading();
-                setOwner(response);
+                if (response.length) {
+                    setOwner(response[0]);
+                }
+
             })
             .catch(() => {
                 setSearchWasPerformed();
