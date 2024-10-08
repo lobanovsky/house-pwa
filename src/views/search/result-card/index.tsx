@@ -1,20 +1,13 @@
 import {useMemo} from "react";
 import {Card, Typography} from "antd";
-import {OverviewAccessVO} from "backend/services/backend";
+import {OverviewResponse} from "backend/services/backend";
 import {CarIcon} from "icons/car";
 import {getPhoneNumberForCall} from "../utils";
 import './styles.scss';
 
-export const CarSearchResultCard = ({carResult: carResult}: { carResult: OverviewAccessVO }) => {
+export const CarSearchResultCard = ({carResult}: { carResult: OverviewResponse }) => {
     const phoneNumberToCall = useMemo(() => getPhoneNumberForCall(carResult?.phoneNumber || ''),
         [carResult?.phoneNumber]);
-
-    const isTenant = useMemo(() => {
-        const isPersonTenant = (carResult?.overviewAreas || []).every(({tenant = false}) => !!tenant);
-        return isPersonTenant;
-    },
-        [(carResult?.overviewAreas || []).length]
-    );
 
 
     return (
@@ -31,7 +24,7 @@ export const CarSearchResultCard = ({carResult: carResult}: { carResult: Overvie
                         : <span>phoneNumberToCall</span>}
                 </div>
                 <span className={'phone-label'}>{carResult?.phoneLabel}</span>
-                {isTenant && <div className='tenant'>аренда</div> }
+                {carResult.tenant && <div className='tenant'>аренда</div> }
             </div>
             <div className='owner-info'>
                 {/*<UserIcon/>*/}

@@ -2,7 +2,7 @@ import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {Button, Input, Result, Skeleton, Typography} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import debounce from "lodash/debounce";
-import {AccessService, OverviewAccessVO} from "backend/services/backend";
+import {AccessService, OverviewResponse} from "backend/services/backend";
 import {useLoading} from "hooks/use-loading";
 import {CarSearchResultCard} from "./result-card";
 import './styles.scss';
@@ -11,7 +11,7 @@ import './styles.scss';
 export const CarSearch = () => {
     const [loading, showLoading, hideLoading] = useLoading();
     const [searchCarNun, setSearchCarNum] = useState("");
-    const [foundOwner, setOwner] = useState<OverviewAccessVO | null>(null);
+    const [foundOwner, setOwner] = useState<OverviewResponse | null>(null);
     const [searchWasPerformed, setSearchWasPerformed, clearSearchPerformed] = useLoading();
 
     const searchData = useCallback((carNum: string = "") => {
@@ -25,12 +25,10 @@ export const CarSearch = () => {
             plateNumber: searchStr,
             active: true
         })
-            .then((response: OverviewAccessVO[]) => {
+            .then((response: OverviewResponse) => {
                 setSearchWasPerformed();
                 hideLoading();
-                if (response.length) {
-                    setOwner(response[0]);
-                }
+               setOwner(response);
 
             })
             .catch(() => {
