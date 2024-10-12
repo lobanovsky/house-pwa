@@ -5,12 +5,26 @@
 /** Generate by swagger-axios-codegen */
 /* eslint-disable */
 // @ts-nocheck
-import axiosStatic, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axiosStatic, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
 export interface IRequestOptions extends AxiosRequestConfig {
-  /** only in axios interceptor config*/
+  /**
+   * show loading status
+   */
   loading?: boolean;
+  /**
+   * display error message
+   */
   showError?: boolean;
+  /**
+   * data security, extended fields are encrypted using the specified algorithm
+   */
+  security?: Record<string, 'md5' | 'sha1' | 'aes' | 'des'>;
+  /**
+   * indicates whether Authorization credentials are required for the request
+   * @default true
+   */
+  withAuthorization?: boolean;
 }
 
 export interface IRequestConfig {
@@ -37,10 +51,10 @@ export function axios(configs: IRequestConfig, resolve: (p: any) => void, reject
   if (serviceOptions.axios) {
     return serviceOptions.axios
       .request(configs)
-      .then(res => {
+      .then((res) => {
         resolve(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err);
       });
   } else {
@@ -103,10 +117,6 @@ export class RepairControllerService {
 
       const configs: IRequestConfig = getConfigs('put', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -118,10 +128,6 @@ export class RepairControllerService {
       let url = basePath + '/repairs/remove-duplicates';
 
       const configs: IRequestConfig = getConfigs('put', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -157,10 +163,6 @@ export class RepairControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -172,10 +174,6 @@ export class RepairControllerService {
       let url = basePath + '/repairs/init-garage';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -196,7 +194,17 @@ export class RepairControllerService {
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { months: params['months'] };
 
-      /** 适配ios13，get请求不允许带body */
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  addAreas(options: IRequestOptions = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/repairs/add-availabel-access-areas';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
       axios(configs, resolve, reject);
     });
@@ -237,8 +245,6 @@ export class CounterpartyControllerService {
       let url = basePath + '/counterparties';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -309,10 +315,6 @@ export class AccessControllerService {
 
       const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -357,8 +359,6 @@ export class AccessControllerService {
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { active: params['active'] };
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -381,8 +381,6 @@ export class AccessControllerService {
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { active: params['active'] };
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -401,8 +399,6 @@ export class AccessControllerService {
       url = url.replace('{area-id}', params['areaId'] + '');
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -453,8 +449,6 @@ export class RoomControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -466,8 +460,6 @@ export class RoomControllerService {
       let url = basePath + '/rooms/types';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -487,8 +479,6 @@ export class RoomControllerService {
       url = url.replace('{buildingId}', params['buildingId'] + '');
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -600,8 +590,6 @@ export class PaymentReportControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -624,10 +612,6 @@ export class RegistryControllerService {
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
       configs.params = { useInactiveAccount: params['useInactiveAccount'] };
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -639,10 +623,6 @@ export class RegistryControllerService {
       let url = basePath + '/registries/manual-account';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -663,10 +643,6 @@ export class RegistryControllerService {
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
       configs.params = { sum: params['sum'] };
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -685,10 +661,6 @@ export class RegistryControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
       configs.params = { useInactiveAccount: params['useInactiveAccount'] };
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -790,6 +762,10 @@ export class PaymentControllerService {
 
       const configs: IRequestConfig = getConfigs('patch', 'application/json', url, options);
 
+      /** 适配移动开发（iOS13 等版本），只有 POST、PUT 等请求允许带body */
+
+      console.warn('适配移动开发（iOS13 等版本），只有 POST、PUT 等请求允许带body');
+
       let data = params.body;
 
       configs.data = data;
@@ -813,8 +789,6 @@ export class PaymentControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -826,8 +800,6 @@ export class PaymentControllerService {
       let url = basePath + '/payments/types';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -841,8 +813,6 @@ export class PaymentControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -854,8 +824,6 @@ export class PaymentControllerService {
       let url = basePath + '/payments/deposits';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -899,8 +867,6 @@ export class LogEntryControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -924,7 +890,24 @@ export class LogEntryControllerService {
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { gateId: params['gateId'], startDate: params['startDate'], endDate: params['endDate'] };
 
-      /** 适配ios13，get请求不允许带body */
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   * Get log entry overview by phone number
+   */
+  getLastByPhoneNumber(
+    params: {
+      /**  */
+      phoneNumber: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/log-entries/overview/{phone-number}';
+      url = url.replace('{phone-number}', params['phoneNumber'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
       axios(configs, resolve, reject);
     });
@@ -949,8 +932,6 @@ export class LogEntryControllerService {
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { gateId: params['gateId'], startDate: params['startDate'], endDate: params['endDate'] };
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -962,8 +943,6 @@ export class LogEntryControllerService {
       let url = basePath + '/log-entries/access-methods';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -1007,8 +986,6 @@ export class FileControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1028,10 +1005,6 @@ export class FileControllerService {
 
       const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1047,10 +1020,6 @@ export class FileImporterControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1062,26 +1031,6 @@ export class FileImporterControllerService {
       let url = basePath + '/files/payments/importer';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
-
-      axios(configs, resolve, reject);
-    });
-  }
-  /**
-   * Import accounts from "HOMEOWNER" from *.xlsx
-   */
-  importAccountsFromHomeowners(options: IRequestOptions = {}): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let url = basePath + '/files/homeowner/accounts/importer';
-
-      const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -1095,10 +1044,6 @@ export class FileImporterControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1110,10 +1055,6 @@ export class FileImporterControllerService {
       let url = basePath + '/files/counters/water/importer';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -1127,10 +1068,6 @@ export class FileImporterControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1143,10 +1080,6 @@ export class FileImporterControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1158,10 +1091,6 @@ export class FileImporterControllerService {
       let url = basePath + '/files/answers/importer';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -1178,10 +1107,6 @@ export class MailingControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1197,10 +1122,6 @@ export class DecisionControllerService {
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
-      let data = null;
-
-      configs.data = data;
-
       axios(configs, resolve, reject);
     });
   }
@@ -1212,10 +1133,6 @@ export class DecisionControllerService {
       let url = basePath + '/decisions/send';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
-
-      let data = null;
-
-      configs.data = data;
 
       axios(configs, resolve, reject);
     });
@@ -1232,8 +1149,6 @@ export class RoomReportControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1249,8 +1164,6 @@ export class DecisionReportControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1262,8 +1175,6 @@ export class DecisionReportControllerService {
       let url = basePath + '/reports/decisions/templates/decisions';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -1277,8 +1188,6 @@ export class DecisionReportControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1291,7 +1200,46 @@ export class DecisionReportControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
+      axios(configs, resolve, reject);
+    });
+  }
+}
+
+export class OwnerControllerService {
+  /**
+   *
+   */
+  getRoomsByOwnerId(
+    params: {
+      /**  */
+      ownerId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/owners/{ownerId}/rooms';
+      url = url.replace('{ownerId}', params['ownerId'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  getOwnerById(
+    params: {
+      /**  */
+      id: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/owners/{id}';
+      url = url.replace('{id}', params['id'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
       axios(configs, resolve, reject);
     });
@@ -1308,8 +1256,6 @@ export class GateControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1324,8 +1270,6 @@ export class BuildingControllerService {
       let url = basePath + '/buildings';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -1346,8 +1290,6 @@ export class BuildingControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1362,8 +1304,6 @@ export class AreaControllerService {
       let url = basePath + '/areas';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -1380,8 +1320,6 @@ export class ActuatorService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1394,8 +1332,6 @@ export class ActuatorService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1407,8 +1343,6 @@ export class ActuatorService {
       let url = basePath + '/actuator/health/**';
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
-
-      /** 适配ios13，get请求不允许带body */
 
       axios(configs, resolve, reject);
     });
@@ -1425,8 +1359,6 @@ export class AccountControllerService {
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
 
-      /** 适配ios13，get请求不允许带body */
-
       axios(configs, resolve, reject);
     });
   }
@@ -1442,7 +1374,7 @@ export interface CounterpartyRequest {
 
 export interface CounterpartyResponse {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   name?: string;
@@ -1465,7 +1397,7 @@ export interface CounterpartyResponse {
 
 export interface AreaRequest {
   /**  */
-  areaId?: number;
+  areaId?: string;
 
   /**  */
   places?: string[];
@@ -1484,6 +1416,9 @@ export interface UpdateAccessRequest {
   phoneLabel?: string;
 
   /**  */
+  tenant?: boolean;
+
+  /**  */
   cars?: CarRequest[];
 
   /**  */
@@ -1492,13 +1427,13 @@ export interface UpdateAccessRequest {
 
 export interface AccessResponse {
   /**  */
-  accessId?: number;
+  accessId?: string;
 
   /**  */
   active?: boolean;
 
   /**  */
-  ownerId?: number;
+  ownerId?: string;
 
   /**  */
   areas?: AreaResponse[];
@@ -1518,7 +1453,7 @@ export interface AccessResponse {
 
 export interface AreaResponse {
   /**  */
-  areaId?: number;
+  areaId?: string;
 
   /**  */
   areaName?: string;
@@ -1533,6 +1468,9 @@ export interface CarResponse {
 
   /**  */
   description?: string;
+
+  /**  */
+  active?: boolean;
 }
 
 export interface RoomFilter {
@@ -1546,7 +1484,7 @@ export interface RoomFilter {
   number?: string;
 
   /**  */
-  building?: number;
+  building?: string;
 
   /**  */
   street?: string;
@@ -1555,32 +1493,12 @@ export interface RoomFilter {
   ownerName?: string;
 }
 
-export interface OwnerVO {
-  /**  */
-  id?: number;
-
-  /**  */
-  fullName?: string;
-
-  /**  */
-  emails?: string[];
-
-  /**  */
-  phones?: string[];
-
-  /**  */
-  active?: boolean;
-
-  /**  */
-  dateOfLeft: string;
-}
-
 export interface PageRoomVO {
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -1624,7 +1542,7 @@ export interface PageableObject {
   pageSize?: number;
 
   /**  */
-  offset?: number;
+  offset?: string;
 
   /**  */
   sort?: SortObject;
@@ -1632,13 +1550,13 @@ export interface PageableObject {
 
 export interface RoomVO {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   street?: string;
 
   /**  */
-  building?: number;
+  building?: string;
 
   /**  */
   cadastreNumber?: string;
@@ -1668,10 +1586,7 @@ export interface RoomVO {
   typeDescription?: string;
 
   /**  */
-  owners?: OwnerVO[];
-
-  /**  */
-  tenants?: OwnerVO[];
+  ownerIds?: string[];
 }
 
 export interface SortObject {
@@ -1758,10 +1673,10 @@ export interface RangeRequest {
 
 export interface PagePaymentVO {
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -1793,7 +1708,7 @@ export interface PagePaymentVO {
 
 export interface PaymentVO {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   uuid?: string;
@@ -1869,7 +1784,7 @@ export interface GroupOfPayment {
 
 export interface OutgoingPayment {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   uuid?: string;
@@ -1928,7 +1843,7 @@ export interface OutgoingPayment {
 
 export interface LogEntryFilter {
   /**  */
-  gateId?: number;
+  gateId?: string;
 
   /**  */
   phoneNumber?: string;
@@ -1954,7 +1869,7 @@ export interface LogEntryFilter {
 
 export interface LogEntryResponse {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   dateTime: string;
@@ -1975,7 +1890,7 @@ export interface LogEntryResponse {
   phoneNumber?: string;
 
   /**  */
-  gateId?: number;
+  gateId?: string;
 
   /**  */
   gateName?: string;
@@ -1983,10 +1898,10 @@ export interface LogEntryResponse {
 
 export interface PageLogEntryResponse {
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -2034,13 +1949,13 @@ export interface FileType {
 
 export interface FileVO {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   name?: string;
 
   /**  */
-  size?: number;
+  size?: string;
 
   /**  */
   checksum?: string;
@@ -2054,10 +1969,10 @@ export interface FileVO {
 
 export interface PageFileVO {
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
-  totalElements?: number;
+  totalPages?: number;
 
   /**  */
   pageable?: PageableObject;
@@ -2122,23 +2037,6 @@ export interface PaymentInfoResponse {
 
   /**  */
   outgoingSum?: number;
-}
-
-export interface AccountHomeownersResponse {
-  /**  */
-  fileName?: string;
-
-  /**  */
-  roomSize?: number;
-
-  /**  */
-  ownerSize?: number;
-
-  /**  */
-  totalSquare?: number;
-
-  /**  */
-  totalPercentage?: number;
 }
 
 export interface EldesGateInfoResponse {
@@ -2209,7 +2107,7 @@ export interface AccessRequest {
   phoneNumber?: string;
 
   /**  */
-  contactLabel?: string;
+  phoneLabel?: string;
 
   /**  */
   tenant?: boolean;
@@ -2220,7 +2118,7 @@ export interface AccessRequest {
 
 export interface CreateAccessRequest {
   /**  */
-  ownerId?: number;
+  ownerId?: string;
 
   /**  */
   accesses?: AccessRequest[];
@@ -2233,7 +2131,7 @@ export interface ManualAccountRequest {
 
 export interface IncomingPayment {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   uuid?: string;
@@ -2385,6 +2283,41 @@ export interface DepositResponse {
   payment?: PaymentVO;
 }
 
+export interface OwnerEntity {
+  /**  */
+  id?: string;
+
+  /**  */
+  fullName?: string;
+
+  /**  */
+  sex?: EnumOwnerEntitySex;
+
+  /**  */
+  emails?: string[];
+
+  /**  */
+  phones?: string[];
+
+  /**  */
+  active?: boolean;
+
+  /**  */
+  dateOfLeft: string;
+
+  /**  */
+  rooms?: string[];
+
+  /**  */
+  source?: string;
+
+  /**  */
+  createDate: string;
+
+  /**  */
+  availableAccessArea?: string[];
+}
+
 export interface LogEntryStatusResponse {
   /**  */
   name?: string;
@@ -2395,7 +2328,7 @@ export interface LogEntryStatusResponse {
 
 export interface TopRatingResponse {
   /**  */
-  count?: number;
+  count?: string;
 
   /**  */
   flatNumber?: string;
@@ -2405,6 +2338,20 @@ export interface TopRatingResponse {
 
   /**  */
   userName?: string;
+}
+
+export interface LogEntryOverview {
+  /**  */
+  lastLogEntry?: LogEntryResponse;
+
+  /**  */
+  lastLogEntries?: LogEntryResponse[];
+
+  /**  */
+  firstLogEntry?: LogEntryResponse;
+
+  /**  */
+  totalSize?: number;
 }
 
 export interface LogEntryAccessMethodResponse {
@@ -2417,7 +2364,7 @@ export interface LogEntryAccessMethodResponse {
 
 export interface GateResponse {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   name?: string;
@@ -2439,7 +2386,7 @@ export interface FileTypeResponse {
 
 export interface Building {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   createDate: string;
@@ -2462,7 +2409,7 @@ export interface Building {
 
 export interface AreaEntity {
   /**  */
-  id?: number;
+  id?: string;
 
   /**  */
   createDate: string;
@@ -2631,6 +2578,10 @@ export enum EnumMonthPaymentVOMonth {
   'OCTOBER' = 'OCTOBER',
   'NOVEMBER' = 'NOVEMBER',
   'DECEMBER' = 'DECEMBER'
+}
+export enum EnumOwnerEntitySex {
+  'MALE' = 'MALE',
+  'FEMALE' = 'FEMALE'
 }
 export enum EnumBuildingType {
   'APARTMENT_BUILDING' = 'APARTMENT_BUILDING',

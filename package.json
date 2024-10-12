@@ -40,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "swagger:codegen": "NODE_ENV=production node src/backend/task.js"
   },
   "eslintConfig": {
     "extends": [
@@ -64,8 +65,9 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/lodash": "^4.17.9",
     "path": "^0.12.7",
-    "replace-in-file": "^8.1.0",
+    "replace-in-file": "^6.3.5",
     "sass": "^1.78.0",
-    "swagger-axios-codegen": "^0.16.14"
+    "swagger-axios-codegen": "^0.16.14",
+    "ts-node": "^10.9.2"
   }
 }

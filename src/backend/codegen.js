@@ -1,9 +1,9 @@
 // @ts-ignore
-const { codegen } = require('swagger-axios-codegen');
+
 const path = require('path');
 const fs = require('fs');
-
-const replace = require('replace-in-file');
+const { codegen } = require('swagger-axios-codegen');
+const replace = require("replace-in-file");
 
 module.exports = async (options) => {
 	const outFile = path.resolve(options.outputDir, 'index.ts');
