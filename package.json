@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "swagger:codegen": "NODE_ENV=production node src/backend/task.js"
+    "swagger:codegen": "NODE_ENV=production node src/backend/codegen/task.js"
   },
   "eslintConfig": {
     "extends": [

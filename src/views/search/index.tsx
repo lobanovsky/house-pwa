@@ -2,7 +2,7 @@ import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {Button, Input, Result, Skeleton, Typography} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import debounce from "lodash/debounce";
-import {AccessService, OverviewResponse} from "backend/services/backend";
+import {AccessService, OverviewResponse} from "backend";
 import {useLoading} from "hooks/use-loading";
 import {CarSearchResultCard} from "./result-card";
 import './styles.scss';

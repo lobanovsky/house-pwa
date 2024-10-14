@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 
-import { serviceOptions } from './services/backend';
+import { serviceOptions } from './index';
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.timeout = 2 * 60 * 1000;

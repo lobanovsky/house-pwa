@@ -385,6 +385,18 @@ export class AccessControllerService {
     });
   }
   /**
+   * Export the accesses to excel
+   */
+  exportAccesses(options: IRequestOptions = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/access/export';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
    * Export the access to .csv by the area id
    */
   exportAccess(
@@ -395,7 +407,7 @@ export class AccessControllerService {
     options: IRequestOptions = {}
   ): Promise<any> {
     return new Promise((resolve, reject) => {
-      let url = basePath + '/access/export/{area-id}';
+      let url = basePath + '/access/export/eldes/{area-id}';
       url = url.replace('{area-id}', params['areaId'] + '');
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
@@ -1366,7 +1378,7 @@ export class AccountControllerService {
 
 export interface CounterpartyRequest {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   inn?: string;
@@ -1377,7 +1389,7 @@ export interface CounterpartyResponse {
   id?: string;
 
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   inn?: string;
@@ -1495,10 +1507,10 @@ export interface RoomFilter {
 
 export interface PageRoomVO {
   /**  */
-  totalElements?: string;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
   pageable?: PageableObject;
@@ -1530,10 +1542,10 @@ export interface PageRoomVO {
 
 export interface PageableObject {
   /**  */
-  paged?: boolean;
+  unpaged?: boolean;
 
   /**  */
-  unpaged?: boolean;
+  paged?: boolean;
 
   /**  */
   pageNumber?: number;
@@ -1673,10 +1685,10 @@ export interface RangeRequest {
 
 export interface PagePaymentVO {
   /**  */
-  totalElements?: string;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
   pageable?: PageableObject;
@@ -1773,7 +1785,7 @@ export interface PaymentVO {
 
 export interface GroupOfPayment {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   payments?: OutgoingPayment[];
@@ -1898,10 +1910,10 @@ export interface LogEntryResponse {
 
 export interface PageLogEntryResponse {
   /**  */
-  totalElements?: string;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
   pageable?: PageableObject;
@@ -1933,7 +1945,7 @@ export interface PageLogEntryResponse {
 
 export interface FileFilter {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   fileType?: EnumFileFilterFileType;
@@ -1941,7 +1953,7 @@ export interface FileFilter {
 
 export interface FileType {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   description?: string;
@@ -1952,7 +1964,7 @@ export interface FileVO {
   id?: string;
 
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   size?: string;
@@ -1969,10 +1981,10 @@ export interface FileVO {
 
 export interface PageFileVO {
   /**  */
-  totalElements?: string;
+  totalPages?: number;
 
   /**  */
-  totalPages?: number;
+  totalElements?: string;
 
   /**  */
   pageable?: PageableObject;
@@ -2199,7 +2211,7 @@ export interface IncomingPayment {
 
 export interface RoomTypeResponse {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   description?: string;
@@ -2320,7 +2332,7 @@ export interface OwnerEntity {
 
 export interface LogEntryStatusResponse {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   description?: string;
@@ -2356,7 +2368,7 @@ export interface LogEntryOverview {
 
 export interface LogEntryAccessMethodResponse {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   description?: string;
@@ -2367,7 +2379,7 @@ export interface GateResponse {
   id?: string;
 
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   phoneNumber?: string;
@@ -2378,7 +2390,7 @@ export interface GateResponse {
 
 export interface FileTypeResponse {
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   description?: string;
@@ -2395,7 +2407,7 @@ export interface Building {
   active?: boolean;
 
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   numberOfApartments?: number;
@@ -2418,7 +2430,7 @@ export interface AreaEntity {
   active?: boolean;
 
   /**  */
-  name?: string;
+  name: string;
 
   /**  */
   specificPlace?: boolean;
@@ -2428,6 +2440,9 @@ export interface AreaEntity {
 
   /**  */
   toNumber?: number;
+
+  /**  */
+  buildingIds?: string[];
 }
 
 export interface Link {
@@ -2617,4 +2632,5 @@ export const CounterpartyService = new CounterpartyControllerService();
 export const BuildingService = new BuildingControllerService();
 export const AccessService = new AccessControllerService();
 export const AreaService = new AreaControllerService();
+export const OwnerService = new OwnerControllerService();
 	

@@ -1,0 +1,42 @@
+
+.car-logs {
+  padding-top: 2em;
+  min-width: 320px;
+  min-height: 48px;
+  text-align: start;
+
+  .field {
+    white-space: nowrap;
+    line-height: 22px;
+
+    .label {
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .date {
+      &.empty {
+        color: gray;
+      }
+
+      &.outdated {
+        color: red;
+      }
+    }
+
+    .ant-statistic {
+      margin-left: 6px;
+      display: inline-block;
+
+      .ant-statistic-content {
+        .ant-statistic-content-value {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0.5em;
+    }
+  }
+}

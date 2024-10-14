@@ -9,18 +9,32 @@ module.exports = async (options) => {
 	const outFile = path.resolve(options.outputDir, 'index.ts');
 
 	try {
-        await codegen({
-            strictNullChecks: false,
-            modelMode: 'interface',
-            ...options
-        });
+		await codegen({
+			strictNullChecks: false,
+			modelMode: "interface",
+			...options
+		});
 
-        await replace({
-            files: outFile,
-            from: /\?: Date;/g,
-            to: ': string;'
-        });
-        await fs.appendFile(outFile, `
+		await replace({
+			files: outFile,
+			from: /\?: Date;/g,
+			to: ': string;'
+		});
+		//
+		await replace({
+			files: outFile,
+			from: /id\?: number;/g,
+			to: "id: number;"
+		});
+
+		await replace({
+			files: outFile,
+			from: /name\?: string;/g,
+			to: "name: string;"
+		});
+
+
+		await fs.appendFile(outFile, `
 			
 export interface TopResponse {
 	count: number,
@@ -50,13 +64,14 @@ export const CounterpartyService = new CounterpartyControllerService();
 export const BuildingService = new BuildingControllerService();
 export const AccessService = new AccessControllerService();
 export const AreaService = new AreaControllerService();
+export const OwnerService = new OwnerControllerService();
 	`, (err) => {
-				if (err) {
-					console.error('Append error');
-				} else {
-					console.log('Append success');
-				}
-			});
+			if (err) {
+				console.error("Append error");
+			} else {
+				console.log("Append success");
+			}
+		});
 	} catch (e) {
 		console.log('%cCodegen error!!!', 'color: red');
 		console.log(e);

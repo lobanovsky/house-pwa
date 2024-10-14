@@ -1,12 +1,17 @@
 import {useMemo} from "react";
 import {Card, Typography} from "antd";
-import {OverviewResponse} from "backend/services/backend";
+import {OverviewResponse} from "backend";
 import {CarIcon} from "icons/car";
 import {getPhoneNumberForCall} from "../utils";
 import './styles.scss';
+import {CarGateLogs} from "./gate-logs";
+import {phoneNumberRenderer} from "../../../utils/renderers";
 
 export const CarSearchResultCard = ({carResult}: { carResult: OverviewResponse }) => {
-    const phoneNumberToCall = useMemo(() => getPhoneNumberForCall(carResult?.phoneNumber || ''),
+    const phoneNumbersMap = useMemo(() => ({
+            call: getPhoneNumberForCall(carResult?.phoneNumber || ''),
+            display: phoneNumberRenderer(carResult?.phoneNumber || '')
+        }),
         [carResult?.phoneNumber]);
 
 
@@ -19,12 +24,12 @@ export const CarSearchResultCard = ({carResult}: { carResult: OverviewResponse }
             </div>
             <div className='phone-info'>
                 <div className='phone'>
-                    {phoneNumberToCall.startsWith('+7') ?
-                        <a href={`tel:${phoneNumberToCall}`}>{phoneNumberToCall}</a>
-                        : <span>phoneNumberToCall</span>}
+                    {phoneNumbersMap.call.startsWith('+7') ?
+                        <a href={`tel:${phoneNumbersMap.call}`}>{phoneNumbersMap.display}</a>
+                        : <span>{phoneNumbersMap.display}</span>}
                 </div>
                 <span className={'phone-label'}>{carResult?.phoneLabel}</span>
-                {carResult.tenant && <div className='tenant'>аренда</div> }
+                {carResult.tenant && <div className='tenant'>аренда</div>}
             </div>
             <div className='owner-info'>
                 {/*<UserIcon/>*/}
@@ -34,6 +39,7 @@ export const CarSearchResultCard = ({carResult}: { carResult: OverviewResponse }
                     <div className='owner-flat'>{carResult?.ownerRooms}</div>
                 </div>
             </div>
+            {!!carResult?.phoneNumber && <CarGateLogs phoneNumber={carResult?.phoneNumber}/>}
         </Card>
     )
 }

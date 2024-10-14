@@ -2,10 +2,10 @@ import {Divider, List, Typography} from "antd";
 import {HomeOutlined} from "@ant-design/icons";
 import useRemoteData from "../../hooks/use-remote-data";
 import {ParkingIcon} from "../../icons/parking";
-import {Building, BuildingService, EnumBuildingType} from "../../backend/services/backend";
+import {Building, BuildingService, EnumBuildingType} from "../../backend";
 
 const Buildings = () => {
-    const [buildings, isLoadingBuildings, loadBuildings] = useRemoteData<Building>({loader: BuildingService.findAll1})
+    const [buildings = [], isLoadingBuildings] = useRemoteData<Building[]>({loader: BuildingService.findAll1})
 
     return (
         <div className='building-list view'>
@@ -14,7 +14,7 @@ const Buildings = () => {
                 bordered={false}
 				pagination={false}
                 loading={isLoadingBuildings}
-                dataSource={buildings}
+                dataSource={buildings || []}
                 renderItem={(building) =>
                     <div className='building' style={{padding: '0.5em 1em'}}>
                         {building.type === EnumBuildingType.APARTMENT_BUILDING && <HomeOutlined/>}
