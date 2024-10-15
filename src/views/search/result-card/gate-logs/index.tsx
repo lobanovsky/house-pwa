@@ -34,7 +34,7 @@ const renderDateValue = ({
     <span
         className={`date ${!dateTime ? 'empty' : ''} ${checkForOutdated && isOutdatedEntry(dateTime) ? 'outdated' : ''}`}>
   {dateTime ? dayjs(dateTime)
-      .format('LLL') : ' - '}
+      .format('lll') : ' - '}
         {!!(dateTime && gateName) && ` (${gateName})`}
   </span>
 );
@@ -57,7 +57,7 @@ export function CarGateLogs({phoneNumber}: { phoneNumber: string }) {
                         ))}
                     </div>
                     <div className="field first-entry">
-                        <span className="label">Первый заезд:&nbsp;</span>
+                        <span className="label">Первый заезд:<br/></span>
                         {renderDateValue(log?.firstLogEntry)}
                     </div>
                     <div className="field total">
