@@ -14,15 +14,24 @@
       margin-bottom: 6px;
     }
 
-    .date {
-      &.empty {
-        color: gray;
+    .entry  {
+      .date {
+        &.empty {
+          color: gray;
+        }
+
+        &.outdated {
+          color: red;
+        }
       }
 
-      &.outdated {
-        color: red;
+      &.last-entry {
+        color: #008267;
       }
     }
+
+
+
 
     .ant-statistic {
       margin-left: 6px;

@@ -34,7 +34,7 @@ const renderDateValue = ({
     <span
         className={`date ${!dateTime ? 'empty' : ''} ${checkForOutdated && isOutdatedEntry(dateTime) ? 'outdated' : ''}`}>
   {dateTime ? dayjs(dateTime)
-      .format('LLLL') : ' - '}
+      .format('LLL') : ' - '}
         {!!(dateTime && gateName) && ` (${gateName})`}
   </span>
 );
@@ -50,8 +50,15 @@ export function CarGateLogs({phoneNumber}: { phoneNumber: string }) {
                 <>
                     <div className="field last-entries">
                         <div className="label">Заезды:</div>
-                        {(log?.lastLogEntries || []).map((entry) => <div key={entry.id}>{renderDateValue(entry)}</div>)}
-                        <div>...</div>
+                        {(log?.lastLogEntries || []).map((entry, index) => (
+                            <div key={entry.id} className={`entry ${index === 0 ? 'last-entry' : ''}`}>
+                                {renderDateValue(entry)}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="field first-entry">
+                        <span className="label">Первый заезд:&nbsp;</span>
+                        {renderDateValue(log?.firstLogEntry)}
                     </div>
                     <div className="field total">
                         <span className="label">Всего заездов:</span>
