@@ -10,6 +10,8 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
     "antd": "^5.20.6",
     "antd-mask-input": "^2.0.7",
     "axios": "^1.7.7",
