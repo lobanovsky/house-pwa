@@ -10,8 +10,7 @@
   border-bottom-width: 0;
   background: transparent;
   width: 100%;
-  justify-content: center;
-  gap: 1em;
+  justify-content: space-around;
 
   .ant-menu-item {
     .anticon.ant-menu-item-icon {
@@ -42,5 +41,10 @@
         @include iconColor($antd-blue);
       }
     }
+  }
+
+  &::after,
+  &::before{
+    display: none;
   }
 }

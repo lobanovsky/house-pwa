@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { Menu, MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
@@ -18,21 +18,21 @@ export function HouseMenu() {
     const navigate = useNavigate();
     const { pathname = '' } = useLocation();
 
-    const defaultSelectedPages: string[] = useMemo(() => {
+    const [activeKey, setActiveKeys] = useState<string[]>(() => {
         const names = pathname.split('/');
         const selectedPage = names.length ? names[names.length - 1] : null;
-        console.log(`%cSelected page: [${selectedPage}]`, 'color:blue');
-        return selectedPage ? [selectedPage] : [];
-    }, [pathname]);
+        return selectedPage ? [`/${selectedPage}`] : [];
+    });
 
-    const onMenuItemClick: MenuProps['onClick'] = useCallback((selectedItem: MenuInfo) => {
-        navigate(selectedItem.key);
+    const onMenuItemClick: MenuProps['onClick'] = useCallback(({ key }: MenuInfo) => {
+        setActiveKeys([key]);
+        navigate(key);
     }, []);
 
     return (
         <Menu
           mode="horizontal"
-          defaultSelectedKeys={defaultSelectedPages}
+          selectedKeys={activeKey}
           className="navigation-menu"
           onClick={onMenuItemClick}
           items={AppMenuItems}
