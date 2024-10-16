@@ -1,20 +1,19 @@
-import {ChangeEvent, useCallback, useEffect, useState} from "react";
-import {Button, Input, Result, Skeleton, Typography} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
-import debounce from "lodash/debounce";
-import {AccessService, OverviewResponse} from "backend";
-import {useLoading} from "hooks/use-loading";
-import {CarSearchResultCard} from "./result-card";
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { Button, Input, Result, Skeleton, Typography } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import debounce from 'lodash/debounce';
+import { AccessService, OverviewResponse } from 'backend';
+import { useLoading } from 'hooks/use-loading';
+import { CarSearchResultCard } from './result-card';
 import './styles.scss';
 
-
-export const CarSearch = () => {
+export function CarSearch() {
     const [loading, showLoading, hideLoading] = useLoading();
-    const [searchCarNun, setSearchCarNum] = useState("");
+    const [searchCarNun, setSearchCarNum] = useState('');
     const [foundOwner, setOwner] = useState<OverviewResponse | null>(null);
     const [searchWasPerformed, setSearchWasPerformed, clearSearchPerformed] = useLoading();
 
-    const searchData = useCallback((carNum: string = "") => {
+    const searchData = useCallback((carNum: string = '') => {
         if (carNum.length < 3) {
             return;
         }
@@ -28,8 +27,7 @@ export const CarSearch = () => {
             .then((response: OverviewResponse) => {
                 setSearchWasPerformed();
                 hideLoading();
-               setOwner(response);
-
+                setOwner(response);
             })
             .catch(() => {
                 setSearchWasPerformed();
@@ -43,7 +41,7 @@ export const CarSearch = () => {
         []
     );
 
-    const onChangeCarNum = useCallback(({target: {value}}: ChangeEvent<HTMLInputElement>) => {
+    const onChangeCarNum = useCallback(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
         setSearchCarNum(value);
     }, []);
 
@@ -60,37 +58,43 @@ export const CarSearch = () => {
         }
     }, [searchCarNun]);
 
-
     return (
-        <div className='cars-search view centered-content'>
-            <div className='content'>
+        <div className="cars-search view centered-content">
+            <div className="content">
                 <Typography.Title level={4}>Поиск авто</Typography.Title>
-                <div className='search-form'>
+                <div className="search-form">
                     <Input
-                        size='large'
-                        allowClear
-                        className="car-number"
-                        prefix={<SearchOutlined/>}
-                        placeholder="Номер машины" value={searchCarNun}
-                        onChange={onChangeCarNum}
+                      size="large"
+                      allowClear
+                      className="car-number"
+                      prefix={<SearchOutlined />}
+                      placeholder="Номер машины"
+                      value={searchCarNun}
+                      onChange={onChangeCarNum}
                     />
                     <Button
-                        size='large'
-                        type='primary'
-                        disabled={searchCarNun.length < 3}
-                        onClick={onSearchClick}>Найти</Button>
+                      size="large"
+                      type="primary"
+                      disabled={searchCarNun.length < 3}
+                      onClick={onSearchClick}
+                    >
+                        Найти
+                    </Button>
                 </div>
-                {loading && <Skeleton active/>}
-                {!loading && searchWasPerformed && <div className='search-result'>
-                    {!(foundOwner?.ownerName || foundOwner?.phoneNumber) ? <Result
-                        status="404"
-                        title={`Неопознанное авто "${searchCarNun}"`}
-                        subTitle={`Не удалось найти владельца ТС с гос. номером "${searchCarNun}"`}
-                    /> : <CarSearchResultCard carResult={foundOwner}/>
-                    }
-                </div>}
+                {loading && <Skeleton active />}
+                {!loading && searchWasPerformed && (
+                    <div className="search-result">
+                        {!(foundOwner?.ownerName || foundOwner?.phoneNumber) ? (
+                            <Result
+                              status="404"
+                              title={`Неопознанное авто "${searchCarNun}"`}
+                              subTitle={`Не удалось найти владельца ТС с гос. номером "${searchCarNun}"`}
+                            />
+                        ) : <CarSearchResultCard carResult={foundOwner} />}
+                    </div>
+                )}
             </div>
 
         </div>
-    )
-};
+    );
+}

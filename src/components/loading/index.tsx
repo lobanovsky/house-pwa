@@ -8,30 +8,35 @@
  */
 
 import React from 'react';
-import {Spin} from 'antd';
-import  {SpinProps} from 'antd/lib/spin';
+import { Spin } from 'antd';
+import { SpinProps } from 'antd/lib/spin';
 import './styles.scss';
 
 interface ILoadingProps extends SpinProps {
-	text?: string;
+    text?: string;
 }
 
-const Loading = ({size, text}: ILoadingProps): JSX.Element => (
-	<div
-		role='button'
-		onKeyDown={() => {
-		}}
-		className='loadingMask'
-		onClick={(ev) => {
-			ev.preventDefault();
-		}}
-	>
-		<Spin
-			className='spin'
-			{...{size}}
-			tip={text || ''}
-		/>
-	</div>
-);
+function Loading({
+                     size,
+                     text
+                 }: ILoadingProps): JSX.Element {
+    return (
+        <div
+          role="button"
+          onKeyDown={() => {
+            }}
+          className="loadingMask"
+          onClick={(ev) => {
+                ev.preventDefault();
+            }}
+        >
+            <Spin
+              className="spin"
+              {...{ size }}
+              tip={text || ''}
+            />
+        </div>
+    );
+}
 
 export default Loading;

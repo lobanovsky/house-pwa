@@ -1,10 +1,11 @@
-import {useCallback, useEffect, useState} from "react";
-import {useLoading} from "./use-loading";
-// import { showError } from "../utils/notifications";
-// import { ServerError } from "../utils/types";
-import {IRequestOptions} from "../backend";
+import { useCallback, useEffect, useState } from 'react';
+import { useLoading } from './use-loading';
+import { IRequestOptions } from '../backend';
 
-function useRemoteData<T, OutputT = T>({loader, errorMsg = "Не удалось загрузить данные", dataConverter}: {
+function useRemoteData<T, OutputT = T>({
+                                           loader,
+                                           dataConverter
+                                       }: {
     loader: (options?: IRequestOptions) => Promise<T>,
     errorMsg?: string,
     dataConverter?: (data: T) => OutputT

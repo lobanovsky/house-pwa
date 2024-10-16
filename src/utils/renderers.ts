@@ -1,4 +1,3 @@
-
 const PhoneDisplayRegex = /^7(?<code>\d{3})(?<gr2>\d{3})(?<gr3>\d{2})(?<gr4>\d{2})$/;
 const PhoneBackendRegex = /^7\d{10}$/;
 

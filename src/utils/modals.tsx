@@ -1,15 +1,13 @@
-import React from "react";
-import { ModalProps } from "antd";
-import { modal, ModalInstanceType } from "../global/NotificationsProvider";
-import { EmptyFunction } from "./types";
-
-
+import React from 'react';
+import { ModalProps } from 'antd';
+import { modal, ModalInstanceType } from '../global/NotificationsProvider';
+import { EmptyFunction } from './types';
 
 export interface InfoModalProps extends ModalProps {
   getContent: (props: { closeModal: EmptyFunction }) => React.ReactNode;
 }
 
-export const showModal = ({ className = "", getContent, ...modalProps }: InfoModalProps) => {
+export const showModal = ({ className = '', getContent, ...modalProps }: InfoModalProps) => {
   let modalCmp: ModalInstanceType = null;
 
   const closeModal = () => {
@@ -20,8 +18,8 @@ export const showModal = ({ className = "", getContent, ...modalProps }: InfoMod
     width: 800,
     className: `app-static-modal ${className}`,
     ...modalProps,
-    content: <div className="info-modal-content" style={{ position: "relative" }}>
+    content: <div className="info-modal-content" style={{ position: 'relative' }}>
       {getContent({ closeModal })}
-    </div>
+             </div>
   });
 };

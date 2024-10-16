@@ -41,7 +41,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "swagger:codegen": "NODE_ENV=production node src/backend/codegen/task.js"
+    "swagger:codegen": "NODE_ENV=production node src/backend/codegen/task.js",
+    "lint:fix": "eslint src --ext .tsx,.ts --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +65,12 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/lodash": "^4.17.9",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "path": "^0.12.7",
     "replace-in-file": "^6.3.5",
     "sass": "^1.78.0",
