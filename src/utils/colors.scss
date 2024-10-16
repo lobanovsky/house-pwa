@@ -1,0 +1,48 @@
+$gray: #727272;
+$grayMidDark: #5b5b5b;
+$grayDark: rgba(0, 0, 0, 0.88);
+$green: #03aa85;
+$blue: #2a08ff;
+$red: #ea1c01;
+$yellow: #ffbb00;
+$orange: #ff7c00;
+$orangeDark: #d47010;
+$antd-blue: #0371d7;
+$antd-blue-hover: #69b1ff;
+$antd-blue-active: #0958d9;
+
+$action-icon-table-color: #969696;
+
+@mixin rowActionButtonStyle($color:$action-icon-table-color) {
+  .anticon {
+    vertical-align: 0;
+  }
+
+  &:not(:disabled) {
+    color: $color;
+
+    &:hover {
+      color: $antd-blue-hover;
+    }
+
+    &:active {
+      color: $antd-blue-active;
+    }
+  }
+}
+
+@mixin linkButtonStyle() {
+  color: #2e6bc1;
+  padding: 0;
+  > .anticon + span {
+    margin-inline-start: 4px;
+  }
+
+  &:hover {
+    color: $antd-blue-hover;
+  }
+
+  &:active {
+    color: $antd-blue-active;
+  }
+}

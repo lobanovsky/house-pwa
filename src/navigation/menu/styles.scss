@@ -1,0 +1,46 @@
+@import 'utils/colors';
+
+@mixin iconColor($color : 'inherit') {
+  .anticon.ant-menu-item-icon {
+    color: $color;
+  }
+}
+
+.ant-menu.navigation-menu {
+  border-bottom-width: 0;
+  background: transparent;
+  width: 100%;
+  justify-content: center;
+  gap: 1em;
+
+  .ant-menu-item {
+    .anticon.ant-menu-item-icon {
+      font-size: 20px;
+    }
+
+    &::after {
+      border-bottom: none;
+    }
+
+    .ant-menu-title-content {
+      display: none;
+    }
+
+    &:not(.ant-menu-item-selected) {
+      &:hover {
+        @include iconColor($antd-blue-hover);
+      }
+
+      &:active {
+        @include iconColor($antd-blue-active);
+      }
+
+    }
+
+    &.ant-menu-item-selected {
+      .anticon.ant-menu-item-icon {
+        @include iconColor($antd-blue);
+      }
+    }
+  }
+}

@@ -1,6 +1,36 @@
-.App {
-  font-size: 16px;
-  text-align: center;
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+
+  .ant-app {
+    height: 100%;
+
+    .ant-layout {
+      height: 100%;
+
+      .ant-layout-content {
+        background: rgb(252, 252, 252);
+
+        .view {
+          padding: 1em;
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+
+      .ant-layout-footer {
+        padding: 1em 2em;
+      }
+    }
+  }
+}
+
+.app {
+  //font-size: 16px;
+  //text-align: center;
 
   > .ant-layout {
     height: 100vh;

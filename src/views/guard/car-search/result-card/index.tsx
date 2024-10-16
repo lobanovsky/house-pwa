@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Card, Typography } from 'antd';
 import { OverviewResponse } from 'backend';
 import { CarIcon } from 'icons/car';
-import { phoneNumberRenderer } from '../../../utils/renderers';
+import { phoneNumberRenderer } from '../../../../utils/renderers';
 import { getPhoneNumberForCall } from '../utils';
 import { CarGateLogs } from './gate-logs';
 import './styles.scss';

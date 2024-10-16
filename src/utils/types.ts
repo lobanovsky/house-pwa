@@ -10,3 +10,5 @@ export interface ServerError extends Error, AxiosError, AxiosResponse {
 export type ActionFinishCallback = (isSuccess: boolean) => void;
 export type ActionCallbackWithData<T> = (isSuccess: boolean, data?: T | null) => void;
 export type ActionCallback = () => void;
+
+export type PermissionsConfig = string[] | { OR: string[] };
