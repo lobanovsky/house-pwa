@@ -1,19 +1,23 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { NavigationItems } from '../navigation';
+import { PrivatePage } from './private-route';
 
 export function AppRoutes() {
     return (
         <Routes>
             {NavigationItems.map(
                 ({
+                     roles = [],
                      key = '',
-                     component
+                     component,
+                     ...routeProps
                  }) => (
                     <Route
                       key={key}
+                      {...routeProps}
                       path={key as string}
-                      element={component}
+                      element={<PrivatePage roles={roles}>{component}</PrivatePage>}
                     />
                 )
             )}

@@ -107,6 +107,344 @@ export class PagedResultDto<T = any> implements IPagedResult<T> {
 // customer definition
 // empty
 
+export class WorkspacesService {
+  /**
+   *
+   */
+  getWorkspaceById(
+    params: {
+      /**  */
+      workspaceId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  updateWorkspace(
+    params: {
+      /**  */
+      workspaceId: number;
+      /** requestBody */
+      body?: WorkspaceRequest;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+
+      const configs: IRequestConfig = getConfigs('put', 'application/json', url, options);
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  deleteWorkspace(
+    params: {
+      /**  */
+      workspaceId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+
+      const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  getAllWorkspaces(
+    params: {
+      /**  */
+      pageNum?: number;
+      /**  */
+      pageSize?: number;
+      /**  */
+      name: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = { pageNum: params['pageNum'], pageSize: params['pageSize'], name: params['name'] };
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  createWorkspace(
+    params: {
+      /** requestBody */
+      body?: WorkspaceRequest;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces';
+
+      const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
+}
+
+export class UserService {
+  /**
+   *
+   */
+  getUser(
+    params: {
+      /**  */
+      userId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/{userId}';
+      url = url.replace('{userId}', params['userId'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  updateUser(
+    params: {
+      /**  */
+      userId: number;
+      /** requestBody */
+      body?: UserRequest;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/{userId}';
+      url = url.replace('{userId}', params['userId'] + '');
+
+      const configs: IRequestConfig = getConfigs('put', 'application/json', url, options);
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  deleteUser(
+    params: {
+      /**  */
+      userId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/{userId}';
+      url = url.replace('{userId}', params['userId'] + '');
+
+      const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  getAllUsers(
+    params: {
+      /**  */
+      workspaceId: number;
+      /**  */
+      pageNum?: number;
+      /**  */
+      pageSize?: number;
+      /**  */
+      email?: string;
+      /**  */
+      name: string;
+      /**  */
+      active?: boolean;
+      /** Zero-based page index (0..N) */
+      page?: number;
+      /** The size of the page to be returned */
+      size?: number;
+      /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+      sort?: any | null[];
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}/users';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = {
+        pageNum: params['pageNum'],
+        pageSize: params['pageSize'],
+        email: params['email'],
+        name: params['name'],
+        active: params['active'],
+        page: params['page'],
+        size: params['size'],
+        sort: params['sort']
+      };
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  createUser(
+    params: {
+      /**  */
+      workspaceId: number;
+      /** requestBody */
+      body?: UserRequest;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}/users';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+
+      const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  sendInvitation(
+    params: {
+      /**  */
+      userid: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/{userid}/invitations';
+      url = url.replace('{userid}', params['userid'] + '');
+
+      const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  getAllRoles(options: IRequestOptions = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/roles';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  getWorkspaceByCode(
+    params: {
+      /**  */
+      code: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/codes/{code}';
+      url = url.replace('{code}', params['code'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  findUsersByEmail(
+    params: {
+      /**  */
+      email: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/users/byEmail';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = { email: params['email'] };
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   *
+   */
+  removeUserFromWorkspace(
+    params: {
+      /**  */
+      workspaceId: number;
+      /**  */
+      userId: number;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/workspaces/{workspaceId}/users/{userId}';
+      url = url.replace('{workspaceId}', params['workspaceId'] + '');
+      url = url.replace('{userId}', params['userId'] + '');
+
+      const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);
+
+      axios(configs, resolve, reject);
+    });
+  }
+}
+
 export class RepairControllerService {
   /**
    *
@@ -842,6 +1180,31 @@ export class PaymentControllerService {
   }
 }
 
+export class AuthService {
+  /**
+   *
+   */
+  token(
+    params: {
+      /** requestBody */
+      body?: LoginRequest;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/login';
+
+      const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
+}
+
 export class LogEntryControllerService {
   /**
    * Get all log entries
@@ -1122,6 +1485,25 @@ export class MailingControllerService {
       axios(configs, resolve, reject);
     });
   }
+  /**
+   * Ping by email
+   */
+  ping(
+    params: {
+      /**  */
+      email?: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/emails/ping';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = { email: params['email'] };
+
+      axios(configs, resolve, reject);
+    });
+  }
 }
 
 export class DecisionControllerService {
@@ -1374,6 +1756,90 @@ export class AccountControllerService {
       axios(configs, resolve, reject);
     });
   }
+}
+
+export interface WorkspaceRequest {
+  /**  */
+  name: string;
+}
+
+export interface Workspace {
+  /**  */
+  id?: string;
+
+  /**  */
+  createDate: string;
+
+  /**  */
+  active?: boolean;
+
+  /**  */
+  name: string;
+}
+
+export interface UserRequest {
+  /**  */
+  email?: string;
+
+  /**  */
+  name: string;
+
+  /**  */
+  description?: string;
+
+  /**  */
+  role?: EnumUserRequestRole;
+}
+
+export interface AvailableWorkspaceResponse {
+  /**  */
+  id?: string;
+
+  /**  */
+  name: string;
+
+  /**  */
+  color?: string;
+}
+
+export interface RoleResponse {
+  /**  */
+  roleCode?: string;
+
+  /**  */
+  roleName?: string;
+
+  /**  */
+  description?: string;
+}
+
+export interface UserResponse {
+  /**  */
+  id?: string;
+
+  /**  */
+  createDate: string;
+
+  /**  */
+  active?: boolean;
+
+  /**  */
+  email?: string;
+
+  /**  */
+  name: string;
+
+  /**  */
+  description?: string;
+
+  /**  */
+  workspaces?: AvailableWorkspaceResponse[];
+
+  /**  */
+  role?: RoleResponse;
+
+  /**  */
+  code?: string;
 }
 
 export interface CounterpartyRequest {
@@ -1853,6 +2319,31 @@ export interface OutgoingPayment {
   comment?: string;
 }
 
+export interface LoginRequest {
+  /**  */
+  email?: string;
+
+  /**  */
+  password?: string;
+}
+
+export interface TokenResponse {
+  /**  */
+  access_token?: string;
+
+  /**  */
+  token_type?: string;
+
+  /**  */
+  expires_in?: number;
+
+  /**  */
+  userId: number;
+
+  /**  */
+  workspaces?: string[];
+}
+
 export interface LogEntryFilter {
   /**  */
   gateId?: string;
@@ -1894,6 +2385,9 @@ export interface LogEntryResponse {
 
   /**  */
   flatNumber?: string;
+
+  /**  */
+  buildingId?: string;
 
   /**  */
   method?: string;
@@ -2209,6 +2703,93 @@ export interface IncomingPayment {
   comment?: string;
 }
 
+export interface PageWorkspaceResponse {
+  /**  */
+  totalPages?: number;
+
+  /**  */
+  totalElements?: string;
+
+  /**  */
+  pageable?: PageableObject;
+
+  /**  */
+  numberOfElements?: number;
+
+  /**  */
+  size?: number;
+
+  /**  */
+  content?: WorkspaceResponse[];
+
+  /**  */
+  number?: number;
+
+  /**  */
+  sort?: SortObject;
+
+  /**  */
+  first?: boolean;
+
+  /**  */
+  last?: boolean;
+
+  /**  */
+  empty?: boolean;
+}
+
+export interface WorkspaceResponse {
+  /**  */
+  id?: string;
+
+  /**  */
+  createDate: string;
+
+  /**  */
+  active?: boolean;
+
+  /**  */
+  name: string;
+
+  /**  */
+  color?: string;
+}
+
+export interface PageUserResponse {
+  /**  */
+  totalPages?: number;
+
+  /**  */
+  totalElements?: string;
+
+  /**  */
+  pageable?: PageableObject;
+
+  /**  */
+  numberOfElements?: number;
+
+  /**  */
+  size?: number;
+
+  /**  */
+  content?: UserResponse[];
+
+  /**  */
+  number?: number;
+
+  /**  */
+  sort?: SortObject;
+
+  /**  */
+  first?: boolean;
+
+  /**  */
+  last?: boolean;
+
+  /**  */
+  empty?: boolean;
+}
+
 export interface RoomTypeResponse {
   /**  */
   name: string;
@@ -2500,6 +3081,12 @@ export interface OverviewResponse {
   /**  */
   ownerRooms?: string;
 }
+export enum EnumUserRequestRole {
+  'SUPER_ADMIN' = 'SUPER_ADMIN',
+  'STAFF_ADMIN' = 'STAFF_ADMIN',
+  'STAFF_READ_ONLY' = 'STAFF_READ_ONLY',
+  'USER' = 'USER'
+}
 export enum EnumRoomFilterType {
   'FLAT' = 'FLAT',
   'GARAGE' = 'GARAGE',
@@ -2633,4 +3220,6 @@ export const BuildingService = new BuildingControllerService();
 export const AccessService = new AccessControllerService();
 export const AreaService = new AreaControllerService();
 export const OwnerService = new OwnerControllerService();
+export const AuthorizationService = new AuthService();
+export const UsersService = new UserService();
 	

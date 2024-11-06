@@ -1,4 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
+import { AvailableWorkspaceResponse, EnumUserRequestRole, TokenResponse, UserResponse } from '../backend';
 
 export type EmptyFunction = () => void;
 
@@ -12,3 +13,15 @@ export type ActionCallbackWithData<T> = (isSuccess: boolean, data?: T | null) =>
 export type ActionCallback = () => void;
 
 export type PermissionsConfig = string[] | { OR: string[] };
+
+export interface AuthData extends Omit<TokenResponse, 'workspaces'> {}
+
+export interface IUserData extends AuthData, UserResponse {
+    userName?: string;
+    workspaceColor: string,
+    workspaceId: number;
+    workspaceName: string;
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
+    roles: EnumUserRequestRole[];
+}

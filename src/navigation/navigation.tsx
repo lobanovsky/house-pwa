@@ -1,14 +1,14 @@
 import React from 'react';
 import { MenuItemType } from 'antd/es/menu/interface';
-import { LockOutlined, UserOutlined, CarOutlined } from '@ant-design/icons';
-import { PermissionsConfig } from '../utils/types';
+import { CarOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { UserProfile } from '../views/user/profile';
 import { Accesses } from '../views/user/accesses';
 import { CarSearch } from '../views/guard/car-search';
+import { EnumUserRequestRole } from '../backend';
 
 export interface NavigationItemType extends MenuItemType {
     component: React.ReactNode,
-    permissions?: PermissionsConfig
+    roles?: EnumUserRequestRole[]
 }
 
 export const NavigationItems: NavigationItemType[] = [
@@ -17,20 +17,20 @@ export const NavigationItems: NavigationItemType[] = [
         icon: <UserOutlined />,
         // title: 'Профиль',
         component: <UserProfile />,
-        permissions: ['USER']
+        roles: [EnumUserRequestRole.USER]
     },
     {
         key: '/accesses',
         icon: <LockOutlined />,
         // title: 'Доступы',
         component: <Accesses />,
-        permissions: ['USER']
+        roles: [EnumUserRequestRole.USER]
     },
     {
         key: '/car-search',
         icon: <CarOutlined />,
         // title: 'Поиск авто',
         component: <CarSearch />,
-        permissions: ['GUARD']
+        roles: [EnumUserRequestRole.STAFF_READ_ONLY, EnumUserRequestRole.SUPER_ADMIN]
     }
 ];
