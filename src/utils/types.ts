@@ -17,9 +17,10 @@ export type PermissionsConfig = string[] | { OR: string[] };
 export interface AuthData extends Omit<TokenResponse, 'workspaces'> {}
 
 export interface IUserData extends AuthData, UserResponse {
-    userName?: string;
     workspaceColor: string,
     workspaceId: number;
+    userColor: string;
+    firstName: string;
     workspaceName: string;
     isAdmin: boolean;
     isSuperAdmin: boolean;

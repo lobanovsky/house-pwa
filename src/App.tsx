@@ -6,12 +6,13 @@ import ruRU from 'antd/locale/ru_RU';
 import './backend/axios';
 import NotificationsProvider from './global/NotificationsProvider';
 import { AppRoutes } from './navigation/routes';
-import { HouseMenu } from './navigation/menu';
+import { HouseMenu } from './layout/footer';
 import './App.scss';
 
 import { StoreState } from './store';
 import { getUserData } from './views/auth/login/helpers';
 import { logout } from './store/reducers/auth';
+import { HouseHeader } from './layout/header';
 
 function App() {
     const dispatch = useDispatch();
@@ -34,10 +35,9 @@ function App() {
                 <NotificationsProvider />
                 <BrowserRouter>
                     <Layout>
+                        {isUserLoggedIn && <HouseHeader />}
                         <Layout.Content><AppRoutes /></Layout.Content>
-                        <Layout.Footer>
-                            <HouseMenu />
-                        </Layout.Footer>
+                        <HouseMenu />
                     </Layout>
                 </BrowserRouter>
             </AppProvider>

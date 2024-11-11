@@ -1,36 +1,32 @@
 import React from 'react';
-import { MenuItemType } from 'antd/es/menu/interface';
-import { CarOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { UserProfile } from '../views/user/profile';
-import { Accesses } from '../views/user/accesses';
-import { CarSearch } from '../views/guard/car-search';
+import { GrantedAccesses } from '../views/user/accesses';
 import { EnumUserRequestRole } from '../backend';
+import { NavigationMenuItemType } from './types';
 
-export interface NavigationItemType extends MenuItemType {
-    component: React.ReactNode,
-    roles?: EnumUserRequestRole[]
-}
-
-export const NavigationItems: NavigationItemType[] = [
+export const NavigationItems: NavigationMenuItemType[] = [
     {
         key: '/user-profile',
         icon: <UserOutlined />,
-        // title: 'Профиль',
+        hideInMenu: true,
+        // профиль в меню не выводим - он откроется по нажатию на свою аватарку
+         title: 'Профиль',
         component: <UserProfile />,
         roles: [EnumUserRequestRole.USER]
     },
     {
-        key: '/accesses',
+        key: '/granted-accesses',
         icon: <LockOutlined />,
-        // title: 'Доступы',
-        component: <Accesses />,
+        title: 'Доступы',
+        component: <GrantedAccesses />,
         roles: [EnumUserRequestRole.USER]
     },
-    {
-        key: '/car-search',
-        icon: <CarOutlined />,
-        // title: 'Поиск авто',
-        component: <CarSearch />,
-        roles: [EnumUserRequestRole.STAFF_READ_ONLY, EnumUserRequestRole.SUPER_ADMIN]
-    }
+    // {
+    //     key: '/car-search',
+    //     icon: <CarOutlined />,
+    //     // title: 'Поиск авто',
+    //     component: <CarSearch />,
+    //     roles: [EnumUserRequestRole.STAFF_READ_ONLY, EnumUserRequestRole.SUPER_ADMIN]
+    // }
 ];

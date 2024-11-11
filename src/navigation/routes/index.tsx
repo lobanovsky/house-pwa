@@ -13,6 +13,7 @@ export function AppRoutes() {
                      component,
                      ...routeProps
                  }) => (
+                     // @ts-ignore
                     <Route
                       key={key}
                       {...routeProps}
@@ -24,7 +25,7 @@ export function AppRoutes() {
             <Route
               path="*"
                 // todo передедать
-              element={<Navigate replace to="/car-search" />}
+              element={<Navigate replace to="/granted-accesses" />}
             />
         </Routes>
     );

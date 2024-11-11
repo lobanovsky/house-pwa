@@ -10,91 +10,44 @@ $error-red-dark: rgba(224, 51, 51, 0.25);
   justify-content: center;
 
   .ant-card {
+    .ant-card-body {
+      width: 340px;
+
+      .ant-input-affix-wrapper,
+      .ant-skeleton.ant-skeleton-element {
+        &:not(:first-child) {
+          margin-top: 1em;
+        }
+
+
+        .ant-input-prefix {
+          .anticon {
+            color: rgba(0, 0, 0, .25);
+          }
+        }
+      }
+
+    }
+
+
+    .ant-skeleton {
+      width: 100%;
+
+      .ant-skeleton-input {
+        width: 100%;
+      }
+    }
+
+
     .login-button-container {
       margin-top: 2em;
       text-align: center;
+
+      .ant-btn,
+      .ant-skeleton-button {
+        width: 76px;
+      }
     }
   }
 }
 
-.login_container {
-  display: flex;
-  width: 100%;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-
-  .card {
-    width: 440px;
-    position: relative;
-
-
-    .hint {
-      margin-bottom: 20px;
-      color: gray;
-      text-align: center;
-      font-size: 13px;
-      //padding-left: 30px;
-    }
-
-    :global(.ant-input-affix-wrapper) {
-
-    }
-
-    .ok_button {
-      margin-top: 20px;
-    }
-
-    :global(.ant-card-head-title) {
-      text-align: center;
-      //padding: 12px 0;
-    }
-
-    :global(.ant-input-affix-wrapper.invalid) {
-      border-color: $error-red-darker;
-
-      &:focus,
-      &:active,
-      &:hover {
-        //border-color: $error-red-darker;
-        box-shadow: 0 0 0 2px $error-red-dark;
-      }
-    }
-
-    :global(.ant-card-body) {
-      padding: 0;
-
-      .content {
-        padding: 24px 24px;
-      }
-
-      .button_container {
-        text-align: center;
-      }
-
-      :global(.ant-divider-horizontal) {
-        margin-top: 12px;
-        margin-bottom: 6px;
-      }
-    }
-
-    .footer {
-      padding: 10px 14px;
-      padding-bottom: 16px;
-      font-size: 14px;
-      //color: rgba(0,0,0,0.7);
-      //text-align: center;
-      //
-      //:global(.ant-typography-copy) {
-      //	opacity: 0;
-      //}
-      //
-      //&:hover {
-      //	:global(.ant-typography-copy) {
-      //		opacity: 1;
-      //	}
-      //}
-    }
-  }
-}

@@ -5,8 +5,9 @@ import { IUserData } from 'utils/types';
 export const EMPTY_USER: IUserData = {
     id: '',
     name: '',
+    firstName: '',
+    userColor: 'gray',
     userId: -1,
-    userName: '',
     access_token: '',
     roles: [],
     isAdmin: false,
@@ -52,7 +53,7 @@ const authSlice = createSlice({
             state.workspaceId = payload.workspaceId || 0;
             state.workspaceName = payload.workspaceName || '';
         },
-        loginError: (state: AuthStoreState, { payload }: PayloadAction<any>) => {
+        loginError: (state: AuthStoreState) => {
             state.isLoggingIn = false;
             state.isUserLoggedIn = false;
             state.isCheckingToken = false;

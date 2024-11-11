@@ -8,32 +8,37 @@ import LoginView from 'views/auth/login';
 import { userHasPermissions } from '../../utils';
 import { EnumUserRequestRole } from '../../../backend';
 
+interface PrivatePageProps {
+    children: React.ReactNode,
+    roles?: EnumUserRequestRole[]
+}
+
 export function PrivatePage({
-                              children,
-                              roles = [],
-                              path = ''
-                            }: { children: React.ReactNode, path?: string, roles?: EnumUserRequestRole[] }): JSX.Element {
-  const {
-    isLoggingIn,
-    isCheckingToken,
-    isUserLoggedIn,
-    user
-  } = useSelector((state: StoreState) => state.auth);
+                                children,
+                                roles = []
+                            }: PrivatePageProps): JSX.Element {
+    const {
+        isCheckingToken,
+        isUserLoggedIn,
+        user
+    } = useSelector((state: StoreState) => state.auth);
 
-  let element = <Loading />;
+    let element = <Loading />;
 
-  if (!isCheckingToken) {
-    if (!isUserLoggedIn) {
-      element = <LoginView />;
-    } else if (roles.length) {
-      const userHasRoles = userHasPermissions(roles, user.roles);
-      // @ts-ignore
-      element = userHasRoles ? children : <AccessDeniedPage />;
-    } else {
-      // @ts-ignore
-      element = children;
+    if (isCheckingToken || !isUserLoggedIn) {
+        return !isUserLoggedIn ? <LoginView /> : <Loading />;
     }
-  }
 
-  return element;
+    if (!isUserLoggedIn) {
+        element = <LoginView />;
+    } else if (roles.length) {
+        const userHasRoles = userHasPermissions(roles, user.roles);
+        // @ts-ignore
+        element = userHasRoles ? children : <AccessDeniedPage />;
+    } else {
+        // @ts-ignore
+        element = children;
+    }
+
+    return element;
 }

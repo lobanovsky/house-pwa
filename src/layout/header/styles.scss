@@ -1,0 +1,41 @@
+@import '../../utils/colors';
+
+.ant-layout-header {
+  padding-left: 10px;
+  height: 48px;
+  line-height: 48px;
+  display: flex;
+  gap: 1em;
+  padding-right: 10px;
+
+  .user-info {
+    span.user-name {
+      margin-left: 0.5em;
+      color: white;
+
+      .anticon.anticon-right {
+        font-size: 12px;
+        margin-left: 4px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      span.user-name {
+        color: $antd-blue-hover
+      }
+    }
+
+    &:active {
+      span.user-name {
+        color: $antd-blue-active
+      }
+    }
+  }
+
+  .admin-controls {
+    flex: 1 0 auto;
+    text-align: end;
+  }
+}

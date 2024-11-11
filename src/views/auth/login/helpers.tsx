@@ -1,10 +1,11 @@
 import axios from 'axios';
+import stc from 'string-to-color';
+
 import { axiosNotAuthorizedInterceptor } from 'backend/axios';
-import { AvailableWorkspaceResponse, EnumUserRequestRole, UserResponse } from 'backend';
-// import { showWorkspaceSelectModal } from 'hooks/use-workspace-menu';
-import { EMPTY_USER, loginSuccess, logout } from 'store/reducers/auth';
-import { showError } from 'utils/notifications';
+import { EnumUserRequestRole, UserResponse } from 'backend';
+import { EMPTY_USER, loginSuccess } from 'store/reducers/auth';
 import { IUserData } from 'utils/types';
+
 import { loadUserProfile } from './services';
 
 const onSuccessLoadUser = (userData: UserResponse & IUserData, dispatch: any) => {
@@ -30,52 +31,15 @@ export const getUserData = (authData: IUserData, dispatch: any) => {
     const tokenStr = access_token ? `Bearer ${access_token}` : '';
 
     loadUserProfile(tokenStr, userId, (isSuccess, userProfile = { ...EMPTY_USER }) => {
+        const userNameParts = (userProfile?.name || '').split(' ');
+        const firstName = userNameParts.length > 1 ? userNameParts[1] : (userNameParts.length ? userNameParts[0] : '');
         const resultUser: IUserData = {
             ...authData,
-            ...userProfile
+            ...userProfile,
+            firstName,
+            userColor: stc(userProfile?.name || '')
         };
 
-        const grantedWorkspaces = (userProfile?.workspaces || []);
-
-        if (!grantedWorkspaces.length) {
-            showError('Нет доступных пространств для работы. Пожалуйста, обратитесь к администратору сервиса');
-            dispatch(logout());
-            return;
-        }
-
-        // Если есть сохранённый вп и он есть в грантед, то просто его "сохраняем" в грантед
-        // - чтобы мы сразу автоматом его выбрали (и сразу с цветом)
-        // if (authData.workspaceId) {
-        //   const selectedWp = grantedWorkspaces.find((wp) => wp.id === authData.workspaceId);
-        //   if (selectedWp) {
-        //     grantedWorkspaces = [selectedWp];
-        //   }
-        // }
-
         onSuccessLoadUser(resultUser, dispatch);
-
-        // todo ??
-
-        // if (grantedWorkspaces.length > 1) {
-        //   showWorkspaceSelectModal({
-        //     workspaces: resultUser.workspaces || [],
-        //     onOk: (selectedWorkspace: AvailableWorkspaceResponse) => {
-        //       resultUser.workspaceId = selectedWorkspace.id || 0;
-        //       resultUser.workspaceName = selectedWorkspace.name || '';
-        //       resultUser.workspaceColor = selectedWorkspace.color || '';
-        //       onSuccessLoadUser(resultUser, dispatch);
-        //     }
-        //   });
-        // } else {
-        //   const {
-        //     id: onlyWpId,
-        //     name: onlyWpName,
-        //     color
-        //   } = grantedWorkspaces[0];
-        //   resultUser.workspaceId = onlyWpId;
-        //   resultUser.workspaceName = onlyWpName;
-        //   resultUser.workspaceColor = color || '';
-        //   onSuccessLoadUser(resultUser, dispatch);
-        // }
     });
 };
