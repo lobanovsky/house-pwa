@@ -20,9 +20,18 @@ export function HouseHeader() {
 
     const onUserNameClick = useCallback(() => {
         if (!location.pathname.endsWith('/user-profile')) {
-            navigate('/user-profile');
+            navigate('/user-profile', {
+                state: {
+                    openedFrom: location.pathname
+                }
+            });
         }
     }, [location.pathname]);
+
+    // Не показываем хедер, Если мы в профиле у себя
+    if (location.pathname.endsWith('/user-profile')) {
+        return <span />;
+    }
 
     return (
         <Layout.Header>

@@ -42,10 +42,11 @@ function Login() {
         }
         setIsLoggingIn(true);
         doLogin(credentials, (isSuccess: boolean, loginData: AuthData | ServerError) => {
-            setIsLoggingIn(false);
+            // setIsLoggingIn(false);
             if (isSuccess) {
                 getUserData(loginData as IUserData, dispatch);
             } else {
+                setIsLoggingIn(false);
                 const serverError = loginData as ServerError;
                 // В случае ошибки в data будет объект ошибки от бэка
                 const { response: { data: error = '' } = { data: '' } } = serverError;
