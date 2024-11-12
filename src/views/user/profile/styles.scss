@@ -1,46 +1,32 @@
 .view.my-profile {
-  .profile-content {
+  display: flex;
+  flex-flow: column;
 
+  .profile-content {
+    flex: 1 0 auto;
 
     .user-info {
+      .ant-avatar {
+        width: 64px;
+        height: 64px;
+        font-size: 22px;
+      }
+
       .user-name {
-        h5 {
+        h4 {
           margin-top: 8px;
         }
       }
     }
+
+    .user-property {
+      text-align: start;
+    }
   }
 
-  .user-property {
-    text-align: start;
-    padding: 0.5em 1em;
-    //   display: flex;
-    //justify-content: center;
 
-    .property-list {
-
-      .property-item {
-        line-height: 16px;
-        //display: flex;
-        //gap: 0.5em;
-        //align-items: center;
-
-        .prop-number {
-          font-size: 16px;
-          margin-left: 4px;
-        }
-
-        .address {
-          //text-align: end;
-          font-size: 13px;
-          color: #969696;
-        }
-
-        &:not(:last-child) {
-          margin-bottom: 1em;
-        }
-      }
-    }
+  .logout-container {
+    padding-bottom: 1em;
   }
 
 }

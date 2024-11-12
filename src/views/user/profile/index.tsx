@@ -1,15 +1,18 @@
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router';
-import { useSelector } from 'react-redux';
-import { Avatar, Spin, Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Avatar, Button, Spin, Typography } from 'antd';
 import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { getUser } from 'store/auth/selectors';
 import { getUserProperty } from 'store/property/selectors';
 import './styles.scss';
+import { PropertyItem } from './property-item';
+import { logout } from '../../../store/auth/reducer';
 
 export function UserProfile() {
     const user = useSelector(getUser);
-    const { state } = useLocation();
+    const dispatch = useDispatch();
+
     const {
         data: property,
         isLoading
@@ -19,28 +22,36 @@ export function UserProfile() {
         <div className="view my-profile">
             <div className="profile-content">
                 <div className="user-info">
-                    <Avatar style={{ backgroundColor: user.userColor }}><UserOutlined /></Avatar>
+                    <Avatar size="large" style={{ backgroundColor: user.userColor }}><UserOutlined /></Avatar>
                     <div className="user-name">
-                        <Typography.Title level={5}>{user.name}</Typography.Title>
+                        <Typography.Title level={4}>{user.name}</Typography.Title>
                     </div>
                 </div>
                 {user.ownerId && (
                     <div className="user-property">
+                        <Typography.Title level={5}>&nbsp;Собственность</Typography.Title>
                         {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
                         <div className="property-list">
                             {
                                 property.length ? property.map((prop) => (
-                                        <div key={prop.id} className="property-item">
-                                            {prop.typeDescription}
-                                            <span className="prop-number">{prop.number}</span>
-                                            <div className="address">{prop.street}</div>
-                                        </div>
+                                        <PropertyItem property={prop} key={prop.id} />
                                     ))
                                     : (isLoading ? '' : 'нет собственности')
                             }
                         </div>
                     </div>
                 )}
+            </div>
+            <div className="logout-container">
+                <Button
+                  type="text"
+                  danger
+                  onClick={() => {
+                        dispatch(logout());
+                    }}
+                >
+                    Выйти из учётной записи
+                </Button>
             </div>
         </div>
     );

@@ -4,11 +4,12 @@ import { UserProfile } from '../views/user/profile';
 import { GrantedAccesses } from '../views/user/accesses';
 import { EnumUserRequestRole } from '../backend';
 import { NavigationMenuItemType } from './types';
+import { GateIcon } from '../icons/gate';
 
 export const NavigationItems: NavigationMenuItemType[] = [
     {
         key: '/granted-accesses',
-        icon: <LockOutlined />,
+        icon: <GateIcon />,
         title: 'Доступы',
         component: <GrantedAccesses />,
         roles: [EnumUserRequestRole.USER],

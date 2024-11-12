@@ -6,9 +6,9 @@
   align-items: flex-end;
   gap: 1em;
 
-  &:first-child {
-    margin-top: 1.5em;
-  }
+  //&:first-child {
+  //  margin-top: 1.5em;
+  //}
 
   &:not(:last-child) {
     padding-bottom: 6px;
@@ -20,7 +20,7 @@
     flex: 1 0 auto;
     display: flex;
     align-items: flex-start;
-    gap: 1.5em;
+    gap: 0.5em;
 
     .access-user-info {
       .phone-number-container {
@@ -30,8 +30,8 @@
         .phone-number {
           position: relative;
           display: inline-block;
-          font-size: 16px;
-          line-height: 16px;
+          font-size: 18px;
+          line-height: 18px;
           font-weight: 500;
           white-space: nowrap;
 
@@ -60,7 +60,7 @@
 
       .phone-label {
         color: gray;
-        line-height: 14px;
+        line-height: 16px;
 
         &.has-label {
           color: $grayDark;

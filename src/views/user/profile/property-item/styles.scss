@@ -1,0 +1,27 @@
+.property-item {
+  padding: 1em;
+  border-radius: 0.5em;
+  background: rgba(235, 236, 240, 0.7);
+  line-height: 20px;
+
+  &:not(:last-child) {
+    margin-bottom: 1em;
+  }
+
+  .property-name {
+    font-weight: 500;
+    margin-bottom: 0.5em;
+  }
+
+  .address {
+    color: #676767;
+  }
+
+  .square {
+    margin-top: 1em;
+    text-align: end;
+    font-size: 14px;
+    color: gray;
+    font-style: italic;
+  }
+}

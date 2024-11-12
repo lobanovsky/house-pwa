@@ -8,10 +8,11 @@ $areasWidth: 52px;
   gap: 6px;
   line-height: 16px;
   min-height: 36px;
+  padding-top: 2px;
 
   .access-area {
     .anticon {
-      font-size: 19px;
+      font-size: 21px;
 
       &.leaf-icon {
         //color: #61a938;
@@ -26,8 +27,8 @@ $areasWidth: 52px;
       text-align: center;
 
       .place {
-        font-size: 14px;
-        line-height: 15px;
+        font-size: 15px;
+        line-height: 18px;
         color: rgba(90, 90, 90, 0.8);
       }
 

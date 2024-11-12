@@ -1,5 +1,44 @@
 .view.granted-accesses {
+  display: flex;
+  flex-flow: column;
+
+
+  padding: 0.5em 0 0.5em 0 !important;
+
+
+  h5 {
+    margin-bottom: 1em;
+  }
+
   > .access-list {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     text-align: start;
+    flex: 1 0 auto;
+    max-height: calc(100% - 32px - 40px);
+    overflow-y: auto;
+
+    &.single-area {
+      .access-item-areas {
+        width: 26px;
+      }
+    }
+
+
+  }
+
+  .area-icons-placeholder {
+    height: 32px;
+    display: flex;
+    background: rgba(230, 244, 255, 0.5);
+    padding: 2px 8px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+
+    .anticon.anticon-info {
+      font-size: 14px;
+      color: rgba(150, 150, 150, .9);
+    }
   }
 }
