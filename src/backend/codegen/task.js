@@ -10,6 +10,7 @@ codegen({
 	methodName: 'backend',
 	isHello: true,
 	openApi: '3.0.1',
+	useClassTransformer: true,
 	remoteUrl: 'https://housekeeper.docduck.io/api/v3/api-docs',
 	outputDir: 'src/backend',
 	useStaticMethod: false

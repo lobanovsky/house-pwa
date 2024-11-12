@@ -1,0 +1,74 @@
+@import 'utils/colors';
+
+.access-item {
+  //padding: 2px 6px;
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+
+  &:first-child {
+    margin-top: 1.5em;
+  }
+
+  &:not(:last-child) {
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed rgba(220, 220, 220, 0.8);
+  }
+
+  .access-info {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5em;
+
+    .access-user-info {
+      .phone-number-container {
+        margin-bottom: 6px;
+        position: relative;
+
+        .phone-number {
+          position: relative;
+          display: inline-block;
+          font-size: 16px;
+          line-height: 16px;
+          font-weight: 500;
+          white-space: nowrap;
+
+          &:hover {
+            color: $antd-blue;
+            cursor: pointer;
+          }
+
+          &:active {
+            color: $antd-blue-active;
+          }
+
+          .tenant-icon {
+            cursor: help;
+            position: absolute;
+            font-weight: 600;
+            font-size: 14px;
+            color: #f0851e;
+            right: -12px;
+            top: - 8px;
+          }
+        }
+
+
+      }
+
+      .phone-label {
+        color: gray;
+        line-height: 14px;
+
+        &.has-label {
+          color: $grayDark;
+        }
+      }
+    }
+  }
+
+
+}
+

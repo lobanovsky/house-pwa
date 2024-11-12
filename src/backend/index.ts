@@ -7,6 +7,8 @@
 // @ts-nocheck
 import axiosStatic, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
+import { Expose, Transform, Type, plainToClass } from 'class-transformer';
+
 export interface IRequestOptions extends AxiosRequestConfig {
   /**
    * show loading status
@@ -693,6 +695,28 @@ export class AccessControllerService {
     return new Promise((resolve, reject) => {
       let url = basePath + '/access/rooms/{room-id}';
       url = url.replace('{room-id}', params['roomId'] + '');
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+      configs.params = { active: params['active'] };
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   * Get the access by the owner id
+   */
+  findByOwner(
+    params: {
+      /**  */
+      ownerId: number;
+      /**  */
+      active?: boolean;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/access/owners/{owner-id}';
+      url = url.replace('{owner-id}', params['ownerId'] + '');
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
       configs.params = { active: params['active'] };
@@ -1840,6 +1864,9 @@ export interface UserResponse {
 
   /**  */
   code?: string;
+
+  /**  */
+  ownerId: number;
 }
 
 export interface CounterpartyRequest {
@@ -1875,7 +1902,7 @@ export interface CounterpartyResponse {
 
 export interface AreaRequest {
   /**  */
-  areaId?: string;
+  areaId: number;
 
   /**  */
   places?: string[];
@@ -1905,13 +1932,13 @@ export interface UpdateAccessRequest {
 
 export interface AccessResponse {
   /**  */
-  accessId?: string;
+  accessId: number;
 
   /**  */
   active?: boolean;
 
   /**  */
-  ownerId?: string;
+  ownerId: number;
 
   /**  */
   areas?: AreaResponse[];
@@ -1931,7 +1958,7 @@ export interface AccessResponse {
 
 export interface AreaResponse {
   /**  */
-  areaId?: string;
+  areaId: number;
 
   /**  */
   areaName?: string;
@@ -2346,7 +2373,7 @@ export interface TokenResponse {
 
 export interface LogEntryFilter {
   /**  */
-  gateId?: string;
+  gateId: number;
 
   /**  */
   phoneNumber?: string;
@@ -2387,7 +2414,7 @@ export interface LogEntryResponse {
   flatNumber?: string;
 
   /**  */
-  buildingId?: string;
+  buildingId: number;
 
   /**  */
   method?: string;
@@ -2396,7 +2423,7 @@ export interface LogEntryResponse {
   phoneNumber?: string;
 
   /**  */
-  gateId?: string;
+  gateId: number;
 
   /**  */
   gateName?: string;
@@ -2624,7 +2651,7 @@ export interface AccessRequest {
 
 export interface CreateAccessRequest {
   /**  */
-  ownerId?: string;
+  ownerId: number;
 
   /**  */
   accesses?: AccessRequest[];
@@ -3190,20 +3217,6 @@ export enum EnumBuildingType {
   'UNDERGROUND_PARKING' = 'UNDERGROUND_PARKING'
 }
 
-			
-export interface TopResponse {
-	count: number,
-	id: number,
-	flatNumber?: string,
-	phoneNumber?: string,
-	userName: string
-};
-
-export interface TopFilter {
-	gateId?: number;
-	startDate?: string;
-	endDate?: string;
-}
 
 
 export const PaymentService = new PaymentControllerService();

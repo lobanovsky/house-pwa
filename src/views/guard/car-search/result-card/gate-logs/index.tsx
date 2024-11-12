@@ -25,7 +25,8 @@ const renderDateValue = ({
                          }: LogEntryResponse = {
     dateTime: '',
     id: '',
-    gateId: ''
+    buildingId: 0,
+    gateId: 0
 }, checkForOutdated = false) => (
     <span className={`date ${!dateTime ? 'empty' : ''} ${checkForOutdated && isOutdatedEntry(dateTime) ? 'outdated' : ''}`}>
   {dateTime ? dayjs(dateTime)

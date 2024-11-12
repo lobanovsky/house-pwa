@@ -35,26 +35,12 @@ module.exports = async (options) => {
 
 		await replace({
 			files: outFile,
-			from: /userId\?: string;/g,
-			to: "userId: number;"
+			from: /Id\?: string;/g,
+			to: "Id: number;"
 		});
 
 
 		await fs.appendFile(outFile, `
-			
-export interface TopResponse {
-	count: number,
-	id: number,
-	flatNumber?: string,
-	phoneNumber?: string,
-	userName: string
-};
-
-export interface TopFilter {
-	gateId?: number;
-	startDate?: string;
-	endDate?: string;
-}
 
 
 export const PaymentService = new PaymentControllerService();

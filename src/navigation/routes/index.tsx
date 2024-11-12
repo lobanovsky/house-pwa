@@ -11,6 +11,7 @@ export function AppRoutes() {
                      roles = [],
                      key = '',
                      component,
+                    availableForUser = undefined,
                      ...routeProps
                  }) => (
                      // @ts-ignore
@@ -18,7 +19,7 @@ export function AppRoutes() {
                       key={key}
                       {...routeProps}
                       path={key as string}
-                      element={<PrivatePage roles={roles}>{component}</PrivatePage>}
+                      element={<PrivatePage roles={roles} availableForUser={availableForUser}>{component}</PrivatePage>}
                     />
                 )
             )}

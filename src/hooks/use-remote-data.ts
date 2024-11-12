@@ -4,10 +4,12 @@ import { IRequestOptions } from '../backend';
 
 function useRemoteData<T, OutputT = T>({
                                            loader,
-                                           dataConverter
+                                           dataConverter,
+    loadOnInit = true
                                        }: {
     loader: (options?: IRequestOptions) => Promise<T>,
     errorMsg?: string,
+    loadOnInit?: boolean,
     dataConverter?: (data: T) => OutputT
 }): [OutputT | null, boolean, () => void] {
     const [loading, showLoading, hideLoading] = useLoading();
@@ -28,7 +30,11 @@ function useRemoteData<T, OutputT = T>({
             });
     }, []);
 
-    useEffect(loadData, []);
+    useEffect(() => {
+        if (loadOnInit) {
+            loadData();
+        }
+    }, []);
 
     return [data, loading, loadData];
 }

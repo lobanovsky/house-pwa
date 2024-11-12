@@ -6,6 +6,7 @@ export const EMPTY_USER: IUserData = {
     id: '',
     name: '',
     firstName: '',
+    ownerId: 0,
     userColor: 'gray',
     userId: -1,
     access_token: '',

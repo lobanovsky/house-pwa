@@ -1,5 +1,6 @@
 import React from 'react';
 import { EnumUserRequestRole } from 'backend';
+import { IUserData } from '../utils/types';
 
 export interface RouteConfig {
   key: string | number;
@@ -22,6 +23,7 @@ export interface NavigationItemType extends RouteConfig, NavigationItemConfig {
 export interface NavigationMenuItemType extends NavigationItemType {
   children?: NavigationItemType[];
   hideInMenu?: boolean;
+  availableForUser?: (user: IUserData) => boolean
 }
 
 // export interface NavigationSubmenuItemType extends NavigationItemConfig {

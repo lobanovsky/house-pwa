@@ -7,14 +7,17 @@ import AccessDeniedPage from 'views/auth/access-denied-page';
 import LoginView from 'views/auth/login';
 import { userHasPermissions } from '../../utils';
 import { EnumUserRequestRole } from '../../../backend';
+import { IUserData } from '../../../utils/types';
 
 interface PrivatePageProps {
     children: React.ReactNode,
-    roles?: EnumUserRequestRole[]
+    roles?: EnumUserRequestRole[],
+    availableForUser?: (user: IUserData) => boolean
 }
 
 export function PrivatePage({
                                 children,
+    availableForUser = undefined,
                                 roles = []
                             }: PrivatePageProps): JSX.Element {
     const {
@@ -34,7 +37,7 @@ export function PrivatePage({
     } else if (roles.length) {
         const userHasRoles = userHasPermissions(roles, user.roles);
         // @ts-ignore
-        element = userHasRoles ? children : <AccessDeniedPage />;
+        element = (!availableForUser || availableForUser(user)) && userHasRoles ? children : <AccessDeniedPage />;
     } else {
         // @ts-ignore
         element = children;
