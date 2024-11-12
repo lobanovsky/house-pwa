@@ -18,16 +18,12 @@ export interface NavigationItemConfig {
 
 export interface NavigationItemType extends RouteConfig, NavigationItemConfig {
   hidden?: boolean;
-}
-
-export interface NavigationMenuItemType extends NavigationItemType {
-  children?: NavigationItemType[];
   hideInMenu?: boolean;
   availableForUser?: (user: IUserData) => boolean
 }
 
-// export interface NavigationSubmenuItemType extends NavigationItemConfig {
-//   children: NavigationItemType[];
-// }
+export interface NavigationMenuItemType extends NavigationItemType {
+  children?: NavigationItemType[];
+}
 
 export type NavigationType = Array<NavigationMenuItemType>;

@@ -3,16 +3,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { App as AppProvider, ConfigProvider, Layout } from 'antd';
 import ruRU from 'antd/locale/ru_RU';
-import './backend/axios';
-import NotificationsProvider from './global/NotificationsProvider';
-import { AppRoutes } from './navigation/routes';
-import { HouseMenu } from './layout/footer';
-import './App.scss';
 
-import { StoreState } from './store';
-import { getUserData } from './views/auth/login/helpers';
-import { logout } from './store/reducers/auth';
-import { HouseHeader } from './layout/header';
+import './backend/axios';
+import NotificationsProvider from 'global/NotificationsProvider';
+import { HouseFooter } from 'layout/footer';
+import { HouseHeader } from 'layout/header';
+import { AppRoutes } from 'navigation/routes';
+import { StoreState } from 'store';
+import { logout } from 'store/auth/reducer';
+import { getUserData } from 'views/auth/login/helpers';
+
+import './App.scss';
 
 function App() {
     const dispatch = useDispatch();
@@ -35,9 +36,9 @@ function App() {
                 <NotificationsProvider />
                 <BrowserRouter>
                     <Layout>
-                        {isUserLoggedIn && <HouseHeader />}
+                        {/* {isAd && <HouseHeader />} */}
                         <Layout.Content><AppRoutes /></Layout.Content>
-                        <HouseMenu />
+                        <HouseFooter />
                     </Layout>
                 </BrowserRouter>
             </AppProvider>

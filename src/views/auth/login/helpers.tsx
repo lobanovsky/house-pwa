@@ -3,7 +3,7 @@ import stc from 'string-to-color';
 
 import { axiosNotAuthorizedInterceptor } from 'backend/axios';
 import { EnumUserRequestRole, UserResponse } from 'backend';
-import { EMPTY_USER, loginSuccess, logout } from 'store/reducers/auth';
+import { EMPTY_USER, loginSuccess, logout } from 'store/auth/reducer';
 import { IUserData } from 'utils/types';
 
 import { loadUserProfile } from './services';

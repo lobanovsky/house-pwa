@@ -6,8 +6,8 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 import { MenuItemType } from 'antd/es/menu/interface';
 
 import { NavigationItems } from 'navigation/navigation';
-import { filterNavigationByUserRoles } from 'navigation/utils';
-import { getUser } from 'store/selectors/auth';
+import { createNavigationForUser } from 'navigation/utils';
+import { getUser } from 'store/auth/selectors';
 import './styles.scss';
 
 const AppMenuItems: MenuItemType[] = NavigationItems
@@ -18,13 +18,16 @@ const AppMenuItems: MenuItemType[] = NavigationItems
              roles,
              hideInMenu,
              ...menuItemConfig
-         }) => menuItemConfig
-    );
+         }) => ({
+            ...menuItemConfig,
+            label: menuItemConfig.title
+        })
+);
 
-export function HouseMenu() {
+export function HouseFooter() {
     const navigate = useNavigate();
     const { pathname = '' } = useLocation();
-    const { roles = [] } = useSelector(getUser);
+    const user = useSelector(getUser);
 
     const [activeKey, setActiveKeys] = useState<string[]>(() => {
         const names = pathname.split('/');
@@ -34,9 +37,9 @@ export function HouseMenu() {
 
     const grantedNavigation = useMemo<MenuItemType[]>(
         // @ts-ignore
-() => (!roles.length ? [] : filterNavigationByUserRoles(AppMenuItems, roles)),
-        [roles.length]
-);
+        () => (!(user.roles || []).length ? [] : createNavigationForUser(AppMenuItems, user)),
+        [user.roles.length]
+    );
 
     const onMenuItemClick: MenuProps['onClick'] = useCallback(({ key }: MenuInfo) => {
         setActiveKeys([key]);

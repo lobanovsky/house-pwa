@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { Avatar, Button, Layout } from 'antd';
 import { RightOutlined, UserOutlined } from '@ant-design/icons';
-import { getUser } from 'store/selectors/auth';
+import { getUser } from 'store/auth/selectors';
+import { logout } from 'store/auth/reducer';
 import './styles.scss';
-import { logout } from '../../store/reducers/auth';
 
 export function HouseHeader() {
     const {

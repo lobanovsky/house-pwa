@@ -1,6 +1,6 @@
 import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { loginError } from '../../reducers/auth';
+import { loginError } from './reducer';
 
 export const authMiddleware = createListenerMiddleware();
 

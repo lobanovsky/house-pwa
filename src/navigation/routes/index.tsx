@@ -1,9 +1,12 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUser } from 'store/auth/selectors';
 import { NavigationItems } from '../navigation';
 import { PrivatePage } from './private-route';
 
 export function AppRoutes() {
+    const user = useSelector(getUser);
     return (
         <Routes>
             {NavigationItems.map(
@@ -11,10 +14,10 @@ export function AppRoutes() {
                      roles = [],
                      key = '',
                      component,
-                    availableForUser = undefined,
+                     availableForUser = undefined,
                      ...routeProps
                  }) => (
-                     // @ts-ignore
+                    // @ts-ignore
                     <Route
                       key={key}
                       {...routeProps}
@@ -26,7 +29,7 @@ export function AppRoutes() {
             <Route
               path="*"
                 // todo передедать
-              element={<Navigate replace to="/granted-accesses" />}
+              element={<Navigate replace to={user.ownerId ? '/granted-accesses' : '/user-profile'} />}
             />
         </Routes>
     );

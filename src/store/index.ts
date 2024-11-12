@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'reduxjs-toolkit-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import authSlice from 'store/reducers/auth';
+import authSlice from 'store/auth/reducer';
+import accessSlice from 'store/accesses/reducer';
+import propertySlice from 'store/property/reducer';
 import { storeMiddleware } from './middleware';
 
 const persistConfig = {
@@ -14,7 +16,9 @@ const persistedAuthReducer = persistReducer(persistConfig, authSlice);
 
 const appStore = configureStore({
   reducer: {
-    auth: persistedAuthReducer
+    auth: persistedAuthReducer,
+    accesses: accessSlice,
+    property: propertySlice
   },
   middleware: storeMiddleware,
   devTools: process.env.NODE_ENV !== 'production'

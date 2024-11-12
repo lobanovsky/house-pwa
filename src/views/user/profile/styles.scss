@@ -1,13 +1,46 @@
 .view.my-profile {
-  .back-button-container {
-    text-align: start;
-  }
+  .profile-content {
 
-  .user-info {
-    .user-name {
-      h5 {
-        margin-top: 8px;
+
+    .user-info {
+      .user-name {
+        h5 {
+          margin-top: 8px;
+        }
       }
     }
   }
+
+  .user-property {
+    text-align: start;
+    padding: 0.5em 1em;
+    //   display: flex;
+    //justify-content: center;
+
+    .property-list {
+
+      .property-item {
+        line-height: 16px;
+        //display: flex;
+        //gap: 0.5em;
+        //align-items: center;
+
+        .prop-number {
+          font-size: 16px;
+          margin-left: 4px;
+        }
+
+        .address {
+          //text-align: end;
+          font-size: 13px;
+          color: #969696;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 1em;
+        }
+      }
+    }
+  }
+
 }

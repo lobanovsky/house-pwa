@@ -1,29 +1,22 @@
 import React, { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Avatar, Button, Typography } from 'antd';
-import { ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
-
-import { getUser } from 'store/selectors/auth';
+import { Avatar, Spin, Typography } from 'antd';
+import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { getUser } from 'store/auth/selectors';
+import { getUserProperty } from 'store/property/selectors';
 import './styles.scss';
 
 export function UserProfile() {
     const user = useSelector(getUser);
     const { state } = useLocation();
-    const navigate = useNavigate();
+    const {
+        data: property,
+        isLoading
+    } = useSelector(getUserProperty);
 
-    const goBack = useCallback(() => {
-        const prevPage = state.openedFrom || '/granted-accesses';
-        navigate(prevPage);
-    }, []);
-
-    console.log(state);
     return (
         <div className="view my-profile">
-            <div className="back-button-container">
-                <Button type="link" size="large" onClick={goBack}><ArrowLeftOutlined /></Button>
-            </div>
-
             <div className="profile-content">
                 <div className="user-info">
                     <Avatar style={{ backgroundColor: user.userColor }}><UserOutlined /></Avatar>
@@ -31,8 +24,24 @@ export function UserProfile() {
                         <Typography.Title level={5}>{user.name}</Typography.Title>
                     </div>
                 </div>
+                {user.ownerId && (
+                    <div className="user-property">
+                        {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
+                        <div className="property-list">
+                            {
+                                property.length ? property.map((prop) => (
+                                        <div key={prop.id} className="property-item">
+                                            {prop.typeDescription}
+                                            <span className="prop-number">{prop.number}</span>
+                                            <div className="address">{prop.street}</div>
+                                        </div>
+                                    ))
+                                    : (isLoading ? '' : 'нет собственности')
+                            }
+                        </div>
+                    </div>
+                )}
             </div>
-            <div>Здесь будет ваш профиль</div>
         </div>
     );
 }

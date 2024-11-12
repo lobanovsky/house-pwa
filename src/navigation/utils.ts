@@ -1,5 +1,6 @@
 import { EnumUserRequestRole } from 'backend';
-import { NavigationType } from './types';
+import { NavigationMenuItemType, NavigationType } from './types';
+import { IUserData } from '../utils/types';
 
 export type IMenuItem = { key: string, label?: string, icon?: string };
 export type MenuItemType = IMenuItem & { children?: IMenuItem[] };
@@ -28,19 +29,36 @@ export const userHasPermissions = (roles: EnumUserRequestRole[], userRoles: Enum
     || userRoles.includes(EnumUserRequestRole.SUPER_ADMIN)
     || roles.some((requiredRole) => userRoles.includes(requiredRole));
 
-export const filterNavigationByUserRoles = (navigationItems: NavigationType, userRoles: EnumUserRequestRole[]): NavigationType => {
+// eslint-disable-next-line max-len
+const isAvailableNavigationItem = ({
+                                       roles = [],
+                                       availableForUser
+                                   }: NavigationMenuItemType, user: IUserData) => (
+    !availableForUser || availableForUser(user)) && userHasPermissions(roles, user.roles);
+
+export const createNavigationForUser = (navigationItems: NavigationType, user: IUserData): NavigationType => {
     const result: NavigationType = [];
-    navigationItems.forEach((item) => {
-        if (Array.isArray(item.children)) {
-            const grantedChildren = item.children.filter(({ roles = [] }) => userHasPermissions(roles, userRoles));
+
+    navigationItems.forEach((menuItem) => {
+        if (Array.isArray(menuItem.children)) {
+            const grantedChildren: NavigationMenuItemType[] = menuItem.children
+                .filter((childMenuItem) => isAvailableNavigationItem(childMenuItem, user));
+
             if (grantedChildren.length) {
                 result.push({
-                    ...item,
-                    children: grantedChildren
+                    ...menuItem,
+                    children: grantedChildren.map(({
+                                                       availableForUser,
+                                                       ...menuItemConfig
+                                                   }) => menuItemConfig)
                 });
             }
-        } else if (userHasPermissions(item.roles || [], userRoles)) {
-            result.push(item);
+        } else if (isAvailableNavigationItem(menuItem, user)) {
+            const {
+                availableForUser,
+                ...menuItemConfig
+            } = menuItem;
+            result.push(menuItemConfig);
         }
     });
 

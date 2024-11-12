@@ -4,10 +4,11 @@ import { Button, Card, Input, Skeleton } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthorizationService, LoginRequest } from 'backend';
-import { loginStarted } from 'store/reducers/auth';
+import { loginStarted } from 'store/auth/reducer';
 import { EmailRegex } from 'utils/constants';
 import { showError } from 'utils/notifications';
 import { AuthData, IUserData, ServerError } from 'utils/types';
+
 import { getUserData } from './helpers';
 import './styles.scss';
 

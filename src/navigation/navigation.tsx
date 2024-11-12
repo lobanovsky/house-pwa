@@ -7,27 +7,23 @@ import { NavigationMenuItemType } from './types';
 
 export const NavigationItems: NavigationMenuItemType[] = [
     {
-        key: '/user-profile',
-        icon: <UserOutlined />,
-        hideInMenu: true,
-        // профиль в меню не выводим - он откроется по нажатию на свою аватарку
-         title: 'Профиль',
-        component: <UserProfile />,
-        roles: [EnumUserRequestRole.USER],
-        availableForUser: (user) => !!user.ownerId
-    },
-    {
         key: '/granted-accesses',
         icon: <LockOutlined />,
         title: 'Доступы',
         component: <GrantedAccesses />,
-        roles: [EnumUserRequestRole.USER]
+        roles: [EnumUserRequestRole.USER],
+        availableForUser: (user) => !!user.ownerId
     },
-    // {
-    //     key: '/car-search',
-    //     icon: <CarOutlined />,
-    //     // title: 'Поиск авто',
-    //     component: <CarSearch />,
-    //     roles: [EnumUserRequestRole.STAFF_READ_ONLY, EnumUserRequestRole.SUPER_ADMIN]
-    // }
+    {
+        key: '/user-profile',
+        icon: <UserOutlined />,
+        title: 'Профиль',
+        component: <UserProfile />,
+        roles: [
+            EnumUserRequestRole.USER,
+            EnumUserRequestRole.SUPER_ADMIN,
+            EnumUserRequestRole.STAFF_ADMIN,
+            EnumUserRequestRole.STAFF_READ_ONLY
+        ]
+    },
 ];
