@@ -41,9 +41,8 @@ export function UserProfile() {
                         </div>
                     </div>
                 )}
-            </div>
-            <div className="logout-container">
                 <Button
+                  className="logout-btn"
                   type="text"
                   danger
                   onClick={() => {
@@ -52,6 +51,12 @@ export function UserProfile() {
                 >
                     Выйти из учётной записи
                 </Button>
+            </div>
+            <div className="logout-container">
+
+                <div className="copyright">
+                    ♡ сделано в Бюро Лобановского
+                </div>
             </div>
         </div>
     );
