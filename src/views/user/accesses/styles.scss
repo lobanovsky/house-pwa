@@ -1,44 +1,53 @@
 .view.granted-accesses {
-  display: flex;
-  flex-flow: column;
-
-
   padding: 0.5em 0 0.5em 0 !important;
+  .content {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 
 
-  h5 {
-    margin-bottom: 1em;
-  }
 
-  > .access-list {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    text-align: start;
-    flex: 1 0 auto;
-    max-height: calc(100% - 32px - 40px);
-    overflow-y: auto;
-
-    &.single-area {
-      .access-item-areas {
-        width: 26px;
-      }
+    h5 {
+      margin: 0.5em 0 1em 0;
     }
 
+    > .access-list {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      text-align: start;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
 
-  }
+      &.single-area {
+        .access-item-areas {
+          width: 26px;
+        }
+      }
 
-  .area-icons-placeholder {
-    height: 32px;
-    display: flex;
-    background: rgba(230, 244, 255, 0.5);
-    padding: 2px 8px;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1em;
 
-    .anticon.anticon-info {
-      font-size: 14px;
-      color: rgba(150, 150, 150, .9);
+    }
+
+    .area-icons-placeholder {
+      //height: 32px;
+      display: flex;
+      margin: 1em 0;
+      //background: rgba(230, 244, 255, 0.5);
+      padding: 0 0.5em;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      line-height: 18px;
+
+      .area {
+        line-height: 18px;
+
+        .anticon {
+          font-size: 14px;
+          //color: rgba(150, 150, 150, .9);
+        }
+      }
+
     }
   }
 }

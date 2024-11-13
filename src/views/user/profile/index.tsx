@@ -41,22 +41,24 @@ export function UserProfile() {
                         </div>
                     </div>
                 )}
-                <Button
-                  className="logout-btn"
-                  type="text"
-                  danger
-                  onClick={() => {
-                        dispatch(logout());
-                    }}
-                >
-                    Выйти из учётной записи
-                </Button>
-            </div>
-            <div className="logout-container">
-
-                <div className="copyright">
-                    ♡ сделано в Бюро Лобановского
+                <div className="logout-btn-container">
+                    <Button
+                      className="logout-btn"
+                      type="text"
+                      danger
+                      onClick={() => {
+                            dispatch(logout());
+                        }}
+                    >
+                        Выйти из учётной записи
+                    </Button>
                 </div>
+
+            </div>
+            <div className="copyright">
+                ♡ сделано в
+                {' '}
+                <Button type="link" size="small" href="https://lobanovsky.ru">Бюро Лобановского</Button>
             </div>
         </div>
     );

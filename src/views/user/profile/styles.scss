@@ -1,9 +1,13 @@
+$copyrightHeight: 40px;
+
 .view.my-profile {
-  display: flex;
-  flex-flow: column;
 
   .profile-content {
-    flex: 1 0 auto;
+    padding: 4px;
+    height: calc(100% - $copyrightHeight);
+    max-height: calc(100% - $copyrightHeight);
+    display: flex;
+    flex-flow: column;
 
     .user-info {
       .ant-avatar {
@@ -21,18 +25,39 @@
 
     .user-property {
       text-align: start;
+      flex: 1 1 auto;
+      //overflow-y: auto;
+      min-height: 0;
+
+      .property-list {
+        max-height: calc(100% - 60px);
+        overflow-y: auto;
+      }
     }
 
-    .logout-btn {
-      margin-top: 1em;
-      font-size: 16px;
+    .logout-btn-container {
+      padding: 1em 0;
+      .logout-btn {
+        font-size: 16px;
+      }
     }
+
   }
 
 
     .copyright {
+      //background: #69b1ff;
       font-size: 14px;
+      height: $copyrightHeight;
+      line-height: 14px;
+      padding: 8px 0;
       color: gray;
+
+      .ant-btn-link {
+        padding: 0;
+        line-height: 14px;
+        font-size: 14px;
+      }
     }
 
 }

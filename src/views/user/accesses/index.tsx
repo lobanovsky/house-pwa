@@ -17,24 +17,27 @@ export function GrantedAccesses() {
     const hasTwoIconsItem = useMemo(() => accesses.some((access) => (access.areas || []).length > 1), [accesses.length]);
     return (
         <div className="view granted-accesses">
-            <Typography.Title level={5}>Ваши доступы</Typography.Title>
-            {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
-            <div className={`access-list ${hasTwoIconsItem ? '' : 'single-area'}`}>
-                {
-                    accesses.length ? accesses.map((access) => <AccessItem key={access.accessId} access={access} />)
-                        : (isLoading ? '' : 'нет доступов')
-                }
-            </div>
-            <div className="area-icons-placeholder">
-                {/* todo брать арии из справочника */}
-                *
-                <div className="area parking">
-                    <ParkingFilledIcon />
-                    <span className="icon-label"> - Паркинг</span>
+            <div className="content">
+                <Typography.Title level={5}>Ваши доступы</Typography.Title>
+
+                {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
+                <div className={`access-list ${hasTwoIconsItem ? '' : 'single-area'}`}>
+                    {
+                        accesses.length ? accesses.map((access) => <AccessItem key={access.accessId} access={access} />)
+                            : (isLoading ? '' : 'нет доступов')
+                    }
                 </div>
-                <div className="area home">
-                    <TreeFilledIcon />
-                    <span className="icon-label"> - Дворовая территория</span>
+                <div className="area-icons-placeholder">
+                    {/* todo брать арии из справочника */}
+                    *
+                    <div className="area parking">
+                        <ParkingFilledIcon />
+                        <span className="icon-label"> - Паркинг</span>
+                    </div>
+                    <div className="area home">
+                        <TreeFilledIcon />
+                        <span className="icon-label"> - Дворовая территория</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,7 +4,11 @@ import { createSlice, PayloadAction, SliceCaseReducers, } from '@reduxjs/toolkit
 import { AccessResponse } from 'backend';
 
 import { LoadingState } from 'store/types';
+import dayjs from 'dayjs';
 import { loadAccessesThunk } from './thunks';
+
+const getRandomId = () => dayjs()
+    .unix() + Math.round(Math.random() * 10000) + Math.round(Math.random() * 100);
 
 export type AccessStoreState = LoadingState<AccessResponse[]>;
 // @ts-ignore
@@ -28,7 +32,10 @@ const accessSlice = createSlice<AccessStoreState, SliceCaseReducers<AccessStoreS
             })
             .addCase(loadAccessesThunk.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.data = payload;
+                state.data = payload.concat(payload.map((item) => ({
+                    ...item,
+                    accessId: getRandomId()
+                })));
                 console.log('%c Acceses loaded success', 'color: blue');
             })
             .addCase(loadAccessesThunk.rejected, (state, action) => {
