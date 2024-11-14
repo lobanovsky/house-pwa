@@ -8,6 +8,7 @@ import { getAccesses } from 'store/accesses/selectors';
 import { AccessItem } from './access-item';
 import './styles.scss';
 import { AreasInfo } from './access-item/constants';
+import { AreasPlaceholder } from './area-placeholder';
 
 export function GrantedAccesses() {
     const {
@@ -19,8 +20,8 @@ export function GrantedAccesses() {
     return (
         <div className="view granted-accesses">
             <div className="content">
-                <Typography.Title level={5}>Ваши доступы</Typography.Title>
-
+                <Typography.Title level={3}>Ваши доступы</Typography.Title>
+                <AreasPlaceholder />
                 {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
                 <div className={`access-list ${hasTwoIconsItem ? '' : 'single-area'}`}>
                     {
@@ -34,26 +35,7 @@ export function GrantedAccesses() {
                             : (isLoading ? '' : 'нет доступов')
                     }
                 </div>
-                <div className="area-icons-placeholder">
-                    <div className="sign">{'\u2217'}</div>
-                    {/* todo брать арии из справочника */}
 
-                    {[1, 2].map((areaId) => {
-                        const areaInfo = AreasInfo[String(areaId)];
-                        const isParking = areaId === 2;
-                        return (
-                            <div className="area" key={areaId}>
-                                <Avatar
-                                  size="small"
-                                  icon={areaInfo?.icon || <QuestionOutlined />}
-                                  style={{ backgroundColor: areaInfo?.colorGrayed || 'gray' }}
-                                />
-                                <span className="dash">-</span>
-                                <span className="label">{isParking ? 'Паркинг' : areaInfo.title}</span>
-                            </div>
-                        );
-                    })}
-                </div>
             </div>
         </div>
     );

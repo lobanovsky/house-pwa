@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Button, Spin, Typography } from 'antd';
-import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Button, Popconfirm, Spin, Typography } from 'antd';
+import { LoadingOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { getUser } from 'store/auth/selectors';
 import { getUserProperty } from 'store/property/selectors';
 import './styles.scss';
 import { PropertyItem } from './property-item';
 import { logout } from '../../../store/auth/reducer';
+import { LogoutIcon } from '../../../icons/logout';
 
 export function UserProfile() {
     const user = useSelector(getUser);
@@ -25,6 +26,17 @@ export function UserProfile() {
     return (
         <div className="view my-profile">
             <div className="profile-content">
+                <div className="logout-btn-container">
+                    <Popconfirm title="Выйти из учётной записи?" placement="left" onConfirm={doLogout}>
+                        <Button
+                          danger
+                          type="text"
+                          size="small"
+                        >
+                            <LogoutIcon />
+                        </Button>
+                    </Popconfirm>
+                </div>
                 <div className="user-info">
                     <Avatar size="large" style={{ backgroundColor: user.userColor }}><UserOutlined /></Avatar>
                     <div className="user-name">
@@ -45,15 +57,6 @@ export function UserProfile() {
                         </div>
                     </div>
                 )}
-                <div className="logout-btn-container">
-                    <Button
-                      danger
-                      type="text"
-                      onClick={doLogout}
-                    >
-                        выйти из учётной записи
-                    </Button>
-                </div>
 
             </div>
             <div className="copyright">

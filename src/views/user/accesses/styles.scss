@@ -14,51 +14,15 @@
     > .access-list {
       padding-left: 0.5em;
       padding-right: 0.5em;
+      //68px - высота заголовка "Ваши доступы"
+      // 60px - высота сносок
+      max-height: calc(100% - 68px - 60px);
       text-align: start;
-      flex: 1 1 auto;
-      min-height: 0;
+      //flex: 1 1 auto;
+      //min-height: 0;
       overflow-y: auto;
     }
 
-    .area-icons-placeholder {
-      display: flex;
-      margin: 1em 0;
-      padding: 0 0.5em;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5em;
-      line-height: 18px;
-      color: #717171;
 
-      .sign {
-        font-size: 12px;
-
-      }
-
-      .area {
-        line-height: 18px;
-        font-size: 14px;
-
-        &:not(:last-child) {
-          margin-right: 0.5em;
-        }
-
-
-        .ant-avatar.ant-avatar-sm {
-          width: 20px;
-          height: 20px;
-        }
-
-        .dash {
-          margin: 0 4px;
-        }
-
-        .anticon {
-          font-size: 12px;
-          //color: rgba(150, 150, 150, .9);
-        }
-      }
-
-    }
   }
 }
