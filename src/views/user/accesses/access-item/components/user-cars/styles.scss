@@ -1,23 +1,11 @@
 @import 'utils/colors';
 
 .access-item-cars {
-  margin-top: 4px;
+  margin-top: 0.5em;
+  font-size: 18px;
 
   .car {
-    display: flex;
-    align-items: center;
-
-    .car-icon {
-
-      font-size: 18px;
-
-      > svg {
-        fill: $gray;
-      }
-    }
-
     .car-number {
-      margin-left: 4px;
       color: $gray;
     }
 

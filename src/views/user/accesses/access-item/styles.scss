@@ -1,70 +1,78 @@
 @import 'utils/colors';
 
 .access-item {
-  //padding: 2px 6px;
+  padding: 10px 6px;
   display: flex;
-  align-items: flex-end;
-  gap: 1em;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 0.5em;
+  background: rgba(241, 241, 245, 0.7);
+  line-height: 20px;
 
-  //&:first-child {
-  //  margin-top: 1.5em;
-  //}
+  &:nth-child(even) {
+    //background: rgba(245, 246, 250, 0.7);
+  }
+
 
   &:not(:last-child) {
     padding-bottom: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 1em;
     border-bottom: 1px dashed rgba(220, 220, 220, 0.8);
   }
 
-  .access-info {
-    flex: 1 0 auto;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5em;
+  .access-user-info {
+    .phone-number-container {
+      margin-bottom: 6px;
+      position: relative;
+      padding-top: 2px;
 
-    .access-user-info {
-      .phone-number-container {
-        margin-bottom: 6px;
+      .phone-number {
         position: relative;
+        display: inline-block;
+        font-size: 22px;
+        line-height: 22px;
 
-        .phone-number {
-          position: relative;
-          display: inline-block;
-          font-size: 18px;
-          line-height: 18px;
-          font-weight: 500;
-          white-space: nowrap;
+        font-weight: 500;
+        white-space: nowrap;
 
-          &:hover {
-            color: $antd-blue;
-            cursor: pointer;
-          }
-
-          &:active {
-            color: $antd-blue-active;
-          }
-
-          .tenant-icon {
-            cursor: help;
-            position: absolute;
-            font-weight: 600;
-            font-size: 14px;
-            color: #f0851e;
-            right: -12px;
-            top: - 8px;
-          }
+        &:hover {
+          color: $antd-blue;
+          cursor: pointer;
         }
 
+        &:active {
+          color: $antd-blue-active;
+        }
 
+        .tenant-icon {
+          cursor: help;
+          position: absolute;
+          font-size: 18px;
+          width: 20px;
+          height: 20px;
+          line-height: 19px;
+          border-radius: 10px;
+          text-align: center;
+          //background-color: #f7993e;
+          background-color: #e69f3d;
+          font-weight: 600;
+          color: white;
+          right: -22px;
+          top: -9px;
+        }
       }
 
-      .phone-label {
-        color: gray;
-        line-height: 16px;
 
-        &.has-label {
-          color: $grayDark;
-        }
+    }
+
+    .phone-label {
+      color: gray;
+      font-size: 18px;
+      padding: 0.5em 0;
+      line-height: 18px;
+
+      &.has-label {
+        color: $grayDark;
       }
     }
   }
