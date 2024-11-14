@@ -7,7 +7,7 @@
 }
 
 .ant-app .ant-layout .ant-layout-footer {
-  //padding: 0.5em 1em !important;
+  padding: 0.5em 1em;
   .ant-menu.navigation-menu {
     border-bottom-width: 0;
     background: transparent;
@@ -19,7 +19,11 @@
       line-height: 20px;
 
       .anticon.ant-menu-item-icon {
-        font-size: 20px;
+        font-size: 18px;
+
+        &.gate-icon {
+          font-size: 20px;
+        }
       }
 
       &::after {
@@ -30,9 +34,9 @@
         display: block;
         color: inherit;
         margin: 0;
-        padding-top: 0.5em;
-        line-height: 14px;
-        font-size: 14px;
+        padding-top: 2px;
+        line-height: 12px;
+        font-size: 12px;
       }
 
       &:not(.ant-menu-item-selected) {

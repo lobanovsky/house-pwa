@@ -24,7 +24,7 @@ const AppMenuItems: MenuItemType[] = NavigationItems
         })
 );
 
-export function HouseFooter() {
+export function Footer() {
     const navigate = useNavigate();
     const { pathname = '' } = useLocation();
     const user = useSelector(getUser);

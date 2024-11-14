@@ -1,5 +1,17 @@
+@import 'utils/colors';
+
+@mixin iconColor($color :rgba(88, 90, 98, 0.7)) {
+  .property-icon {
+    .icon-container {
+      .anticon {
+        color: $color;
+      }
+    }
+  }
+}
+
 .property-item {
-  padding: 1em 0.5em;
+  padding: 10px 0.5em;
   display: flex;
   gap: 1em;
   align-items: center;
@@ -10,7 +22,8 @@
   .property-info {
     flex: 1 0 auto;
   }
-  .icon {
+
+  .property-icon {
     padding: 0.5em;
 
     .icon-container {
@@ -23,15 +36,12 @@
       background: rgba(250, 250, 250, .95);
 
       .anticon {
-        font-size: 32px;
-        color: rgba(80,80,80, 0.9);
+        font-size: 28px;
       }
     }
   }
 
-  &:not(:last-child) {
-    margin-bottom: 1em;
-  }
+
 
   .property-name {
     font-weight: 500;
@@ -43,10 +53,21 @@
   }
 
   .square {
-    margin-top: 1em;
+    margin-top: 0.5em;
     text-align: end;
     font-size: 14px;
     color: gray;
     font-style: italic;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1em;
+  }
+
+  &.GARAGE {
+    @include iconColor($parkingColor);
+  }
+  &.FLAT {
+    @include iconColor($homeColor);
   }
 }

@@ -32,10 +32,25 @@ const accessSlice = createSlice<AccessStoreState, SliceCaseReducers<AccessStoreS
             })
             .addCase(loadAccessesThunk.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.data = payload.concat(payload.map((item) => ({
-                    ...item,
-                    accessId: getRandomId()
-                })));
+                state.data = payload.map((item) => {
+                    const newAccess = { ...item };
+
+                    const {
+                        areas = [],
+                        phoneNumber = ''
+                    } = item;
+                    if (phoneNumber.includes('8') && areas.length === 1) {
+                        item.areas = [{
+                            areaId: 1,
+                            areaName: 'Дворовая территория'
+                        }, {
+                            areaId: 2,
+                            areaName: 'Паркинг'
+                        }];
+                    }
+
+                    return item;
+                });
                 console.log('%c Acceses loaded success', 'color: blue');
             })
             .addCase(loadAccessesThunk.rejected, (state, action) => {

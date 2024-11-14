@@ -9,7 +9,7 @@ import { GateIcon } from '../icons/gate';
 export const NavigationItems: NavigationMenuItemType[] = [
     {
         key: '/granted-accesses',
-        icon: <GateIcon />,
+        icon: <GateIcon className="gate-icon" />,
         title: 'Доступы',
         component: <GrantedAccesses />,
         roles: [EnumUserRequestRole.USER],

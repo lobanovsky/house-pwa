@@ -6,7 +6,7 @@ import { phoneNumberRenderer } from 'utils/renderers';
 import { AccessAreas, AccessItemCars } from './components';
 import './styles.scss';
 
-export function AccessItem({ access }: { access: AccessResponse }) {
+export function AccessItem({ access, doubleAreaWidth = false }: { access: AccessResponse, doubleAreaWidth?: boolean }) {
   const {
     phoneLabel = '',
     phoneNumber = '',
@@ -18,7 +18,7 @@ export function AccessItem({ access }: { access: AccessResponse }) {
   return (
     <div className="access-item">
       <div className="access-info">
-        <AccessAreas areas={accessAreas} />
+        <AccessAreas areas={accessAreas} doubleAreaWidth={doubleAreaWidth} />
         <div className="access-user-info">
           <div className="phone-number-container">
               <div className="phone-number">

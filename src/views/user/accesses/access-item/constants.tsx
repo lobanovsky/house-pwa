@@ -1,7 +1,7 @@
 import React from 'react';
 import { EnumRoomVOType } from 'backend';
-import { ParkingFilledIcon } from 'icons/parking_filled';
-import { TreeFilledIcon } from 'icons/tree-filled';
+import { ParkingIcon } from 'icons/parking';
+import { HouseSmallIcon } from 'icons/house-small';
 
 export const RoomTypeNames: Record<EnumRoomVOType, string> = {
     [EnumRoomVOType.GARAGE]: 'М/м ',
@@ -11,14 +11,20 @@ export const RoomTypeNames: Record<EnumRoomVOType, string> = {
 
 export const AreasInfo: Record<string, {
     title: string;
+    color?:string;
+    colorGrayed?: string;
     icon?: React.ReactNode;
 }> = {
     2: {
         title: 'Подземный паркинг',
-        icon: <ParkingFilledIcon />
+        color: '#5578BC',
+        colorGrayed: '#738cbd',
+        icon: <ParkingIcon />
     },
     1: {
         title: 'Дворовая территория',
-        icon: <TreeFilledIcon />
+        color: '#61a938',
+        colorGrayed: '#7eab64',
+        icon: <HouseSmallIcon />
     }
 };

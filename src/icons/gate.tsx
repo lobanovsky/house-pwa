@@ -39,5 +39,5 @@ function GateSvg() {
 }
 
 export function GateIcon(props: any) {
-  return <Icon component={GateSvg} {...props} />;
+  return <Icon component={GateSvg} className="gate-icon" {...props} />;
 }

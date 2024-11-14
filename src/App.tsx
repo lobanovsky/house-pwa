@@ -6,7 +6,7 @@ import ruRU from 'antd/locale/ru_RU';
 
 import './backend/axios';
 import NotificationsProvider from 'global/NotificationsProvider';
-import { HouseFooter } from 'layout/footer';
+import { Footer } from 'layout/footer';
 import { HouseHeader } from 'layout/header';
 import { AppRoutes } from 'navigation/routes';
 import { StoreState } from 'store';
@@ -38,7 +38,7 @@ function App() {
                     <Layout>
                         {/* {isAd && <HouseHeader />} */}
                         <Layout.Content><AppRoutes /></Layout.Content>
-                        <HouseFooter />
+                        <Footer />
                     </Layout>
                 </BrowserRouter>
             </AppProvider>

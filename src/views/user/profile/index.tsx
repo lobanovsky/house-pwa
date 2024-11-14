@@ -18,6 +18,10 @@ export function UserProfile() {
         isLoading
     } = useSelector(getUserProperty);
 
+    const doLogout = useCallback(() => {
+        dispatch(logout());
+    }, []);
+
     return (
         <div className="view my-profile">
             <div className="profile-content">
@@ -43,22 +47,20 @@ export function UserProfile() {
                 )}
                 <div className="logout-btn-container">
                     <Button
-                      className="logout-btn"
-                      type="text"
                       danger
-                      onClick={() => {
-                            dispatch(logout());
-                        }}
+                      type="text"
+                      onClick={doLogout}
                     >
-                        Выйти из учётной записи
+                        выйти из учётной записи
                     </Button>
                 </div>
 
             </div>
             <div className="copyright">
-                ♡ сделано в
+                сделано в
                 {' '}
                 <Button type="link" size="small" href="https://lobanovsky.ru">Бюро Лобановского</Button>
+                ♡
             </div>
         </div>
     );

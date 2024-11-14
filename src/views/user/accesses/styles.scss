@@ -1,10 +1,10 @@
 .view.granted-accesses {
   padding: 0.5em 0 0.5em 0 !important;
+
   .content {
     display: flex;
     flex-flow: column;
     height: 100%;
-
 
 
     h5 {
@@ -18,32 +18,43 @@
       flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto;
-
-      &.single-area {
-        .access-item-areas {
-          width: 26px;
-        }
-      }
-
-
     }
 
     .area-icons-placeholder {
-      //height: 32px;
       display: flex;
       margin: 1em 0;
-      //background: rgba(230, 244, 255, 0.5);
       padding: 0 0.5em;
       align-items: center;
       justify-content: center;
-      gap: 1em;
+      gap: 0.5em;
       line-height: 18px;
+      color: #717171;
+
+      .sign {
+        font-size: 12px;
+
+      }
 
       .area {
         line-height: 18px;
+        font-size: 14px;
+
+        &:not(:last-child) {
+          margin-right: 0.5em;
+        }
+
+
+        .ant-avatar.ant-avatar-sm {
+          width: 20px;
+          height: 20px;
+        }
+
+        .dash {
+          margin: 0 4px;
+        }
 
         .anticon {
-          font-size: 14px;
+          font-size: 12px;
           //color: rgba(150, 150, 150, .9);
         }
       }

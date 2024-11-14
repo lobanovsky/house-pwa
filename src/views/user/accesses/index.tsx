@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Spin, Typography } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Avatar, Spin, Typography } from 'antd';
+import { LoadingOutlined, QuestionOutlined } from '@ant-design/icons';
 import { ParkingFilledIcon } from 'icons/parking_filled';
 import { TreeFilledIcon } from 'icons/tree-filled';
 import { getAccesses } from 'store/accesses/selectors';
 import { AccessItem } from './access-item';
 import './styles.scss';
+import { AreasInfo } from './access-item/constants';
 
 export function GrantedAccesses() {
     const {
@@ -23,21 +24,35 @@ export function GrantedAccesses() {
                 {isLoading && <Spin indicator={<LoadingOutlined spin />} size="small" />}
                 <div className={`access-list ${hasTwoIconsItem ? '' : 'single-area'}`}>
                     {
-                        accesses.length ? accesses.map((access) => <AccessItem key={access.accessId} access={access} />)
+                        accesses.length ? accesses.map((access) => (
+                                <AccessItem
+                                  key={access.accessId}
+                                  doubleAreaWidth={hasTwoIconsItem}
+                                  access={access}
+                                />
+                            ))
                             : (isLoading ? '' : 'нет доступов')
                     }
                 </div>
                 <div className="area-icons-placeholder">
+                    <div className="sign">{'\u2217'}</div>
                     {/* todo брать арии из справочника */}
-                    *
-                    <div className="area parking">
-                        <ParkingFilledIcon />
-                        <span className="icon-label"> - Паркинг</span>
-                    </div>
-                    <div className="area home">
-                        <TreeFilledIcon />
-                        <span className="icon-label"> - Дворовая территория</span>
-                    </div>
+
+                    {[1, 2].map((areaId) => {
+                        const areaInfo = AreasInfo[String(areaId)];
+                        const isParking = areaId === 2;
+                        return (
+                            <div className="area" key={areaId}>
+                                <Avatar
+                                  size="small"
+                                  icon={areaInfo?.icon || <QuestionOutlined />}
+                                  style={{ backgroundColor: areaInfo?.colorGrayed || 'gray' }}
+                                />
+                                <span className="dash">-</span>
+                                <span className="label">{isParking ? 'Паркинг' : areaInfo.title}</span>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

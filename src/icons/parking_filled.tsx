@@ -13,5 +13,12 @@ function ParkingFilledSvg() {
 }
 
 export function ParkingFilledIcon(props: any) {
-  return <Icon className="parking-filled-icon" component={ParkingFilledSvg} style={{ color: '#5578BC' }} {...props} />;
+  return (
+<Icon
+  className="parking-filled-icon"
+  component={ParkingFilledSvg}
+               // style={{ color: '#5578BC' }}
+  {...props}
+/>
+);
 }

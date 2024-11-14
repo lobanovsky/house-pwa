@@ -1,4 +1,4 @@
-/* eslint-disable max-len, react/destructuring-assignment */
+/* eslint-disable max-len, react/destructuring-assignment, no-tabs */
 import React from 'react';
 import Icon from '@ant-design/icons';
 
@@ -6,19 +6,15 @@ import Icon from '@ant-design/icons';
 function ParkingSvg() {
     return (
         <svg
-          id="Layer_1"
+          fill="currentColor"
             // @ts-ignore
-          style={{ enableBackground: 'new 0 0 24 24' }}
           width="1em"
           height="1em"
-          viewBox="0 0 24 24"
+          viewBox="0 0 15 15"
         >
             <path
-              className="st0"
-              style={{ fill: 'currentColor' }}
-              d="M24,3c0-1.7-1.3-3-3-3H3C1.3,0,0,1.3,0,3v18c0,1.7,1.3,3,3,3h18c1.7,0,3-1.3,3-3V3z M22,21c0,0.6-0.4,1-1,1H3  c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h18c0.6,0,1,0.4,1,1V21z M14.5,5H6v14h2v-5h6.5C17,14,19,12,19,9.5S17,5,14.5,5z M14.5,12H8V7  h6.5C15.9,7,17,8.1,17,9.5S15.9,12,14.5,12z"
+              d="M11.85,8.37c-0.9532,0.7086-2.1239,1.0623-3.31,1H5.79V14H3V1h5.72c1.1305-0.0605,2.244,0.2952,3.13,1&#xA;&#x9;c0.8321,0.8147,1.2543,1.9601,1.15,3.12C13.1271,6.3214,12.7045,7.5159,11.85,8.37z M9.75,3.7C9.3254,3.3892,8.8052,3.237,8.28,3.27&#xA;&#x9;H5.79v3.82h2.49c0.5315,0.0326,1.056-0.1351,1.47-0.47c0.3795-0.3947,0.5693-0.9346,0.52-1.48C10.324,4.606,10.1327,4.0763,9.75,3.7&#xA;&#x9;z"
             />
-
         </svg>
     );
 }

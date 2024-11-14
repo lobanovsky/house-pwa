@@ -7,7 +7,9 @@ body {
 
   .ant-app {
     height: 100%;
-    ;
+    .ant-avatar {
+      color: white;
+    }
 
     .ant-layout {
       height: 100%;
@@ -31,9 +33,6 @@ body {
         }
       }
 
-      .ant-layout-footer {
-        padding: 1em 2em;
-      }
     }
   }
 }
