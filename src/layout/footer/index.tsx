@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Layout, Menu, MenuProps } from 'antd';
@@ -9,6 +9,7 @@ import { NavigationItems } from 'navigation/navigation';
 import { createNavigationForUser } from 'navigation/utils';
 import { getUser } from 'store/auth/selectors';
 import './styles.scss';
+import { modal } from '../../global/NotificationsProvider';
 
 const AppMenuItems: MenuItemType[] = NavigationItems
     .filter(({ hideInMenu = false }) => !hideInMenu)
@@ -22,7 +23,7 @@ const AppMenuItems: MenuItemType[] = NavigationItems
             ...menuItemConfig,
             label: menuItemConfig.title
         })
-);
+    );
 
 export function Footer() {
     const navigate = useNavigate();
@@ -30,9 +31,17 @@ export function Footer() {
     const user = useSelector(getUser);
 
     const [activeKey, setActiveKeys] = useState<string[]>(() => {
-        const names = pathname.split('/');
-        const selectedPage = names.length ? names[names.length - 1] : null;
-        return selectedPage ? [`/${selectedPage}`] : [];
+        const names = pathname.split('/')
+            .filter((path) => !!path);
+
+        const selectedPage = names.length ? names[names.length - 1] : '';
+        let defaultRoute = selectedPage;
+        if (!selectedPage) {
+            defaultRoute = (user.ownerId ? '/granted-accesses' : '/user-profile');
+        }
+
+        console.log(`%c Sel page from pathname: [${selectedPage}], default route: [${defaultRoute}]`, 'color: red;');
+        return [`/${defaultRoute}`];
     });
 
     const grantedNavigation = useMemo<MenuItemType[]>(
@@ -46,15 +55,24 @@ export function Footer() {
         navigate(key);
     }, []);
 
+    useEffect(() => {
+        const selectedRoute = grantedNavigation.find(({ key }) => key === pathname);
+        if (selectedRoute) {
+            setActiveKeys([selectedRoute.key as string]);
+        }
+    }, [pathname, grantedNavigation.length]);
+
     // Нет смысла выводить меню, если нам доступен только 1 пункт
     // он и откроется по умолчанию
     if (grantedNavigation.length < 2) {
         return <span />;
     }
+
     return (
         <Layout.Footer>
             <Menu
               mode="horizontal"
+              defaultSelectedKeys={activeKey}
               selectedKeys={activeKey}
               className="navigation-menu"
               onClick={onMenuItemClick}

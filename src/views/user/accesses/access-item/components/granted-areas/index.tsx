@@ -28,6 +28,7 @@ export function AccessAreas({
                         const areaInfo = AreasInfo[String(areaId)];
                         const cmp = (
                             <Avatar
+                              key={areaId}
                               size="small"
                               icon={areaInfo?.icon || <QuestionOutlined />}
                               style={{ backgroundColor: areaInfo?.color || 'gray' }}
@@ -35,7 +36,7 @@ export function AccessAreas({
                         );
                         return (
                             !isParking ? cmp : (
-                                <div className="parking-container">
+                                <div className="parking-container" key={areaId}>
                                     {cmp}
                                     <div className="places">
                                         {places.map((place) => <div className="place-number" key={place}>{place}</div>)}

@@ -6,8 +6,5 @@ export const loadPropertyThunk = createAsyncThunk<RoomVO[], number, {
     state: { property: LoadingState<RoomVO[]> }
 }>(
     'property/loadByOwnerId',
-    async (ownerId) => {
-        console.log(`%c Load accesses for ownerId=[${ownerId}]`);
-        return OwnerService.getRoomsByOwnerId({ ownerId });
-    }
+    async (ownerId) => OwnerService.getRoomsByOwnerId({ ownerId })
 );

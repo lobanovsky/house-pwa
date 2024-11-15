@@ -38,7 +38,8 @@ function App() {
                     <Layout>
                         {/* {isAd && <HouseHeader />} */}
                         <Layout.Content><AppRoutes /></Layout.Content>
-                        <Footer />
+                        {isUserLoggedIn && <Footer />}
+
                     </Layout>
                 </BrowserRouter>
             </AppProvider>

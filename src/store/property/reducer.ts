@@ -27,8 +27,6 @@ const propertySlice = createSlice<PropertyStoreState, SliceCaseReducers<Property
             .addCase(loadPropertyThunk.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.data = payload;
-                console.log('%c Properties loaded success', 'color: magenta');
-                console.log(payload);
             })
             .addCase(loadPropertyThunk.rejected, (state, action) => {
                 state.isLoading = false;

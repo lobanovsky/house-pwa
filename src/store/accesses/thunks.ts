@@ -6,8 +6,5 @@ export const loadAccessesThunk = createAsyncThunk<AccessResponse[], number, {
     state: { accesses: LoadingState<AccessResponse[]> }
 }>(
     'access/loadByOwnerId',
-    async (ownerId) => {
-        console.log(`%c Load accesses for ownerId=[${ownerId}]`);
-        return AccessService.findByOwner({ ownerId });
-    }
+    async (ownerId) => AccessService.findByOwner({ ownerId })
 );

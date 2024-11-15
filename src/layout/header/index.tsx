@@ -18,16 +18,6 @@ export function HouseHeader() {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const onUserNameClick = useCallback(() => {
-        if (!location.pathname.endsWith('/user-profile')) {
-            navigate('/user-profile', {
-                state: {
-                    openedFrom: location.pathname
-                }
-            });
-        }
-    }, [location.pathname]);
-
     // Не показываем хедер, Если мы в профиле у себя
     if (location.pathname.endsWith('/user-profile')) {
         return <span />;
@@ -35,7 +25,7 @@ export function HouseHeader() {
 
     return (
         <Layout.Header>
-            <div className="user-info" role="button" onClick={onUserNameClick}>
+            <div className="user-info">
                 <Avatar style={{ backgroundColor: userColor }}><UserOutlined /></Avatar>
                 <span className="user-name">
                     {firstName || name}
