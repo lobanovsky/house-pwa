@@ -7,9 +7,8 @@ import { MenuItemType } from 'antd/es/menu/interface';
 
 import { NavigationItems } from 'navigation/navigation';
 import { createNavigationForUser } from 'navigation/utils';
-import { getUser } from 'store/auth/selectors';
+import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
-import { modal } from '../../global/NotificationsProvider';
 
 const AppMenuItems: MenuItemType[] = NavigationItems
     .filter(({ hideInMenu = false }) => !hideInMenu)
@@ -28,7 +27,11 @@ const AppMenuItems: MenuItemType[] = NavigationItems
 export function Footer() {
     const navigate = useNavigate();
     const { pathname = '' } = useLocation();
-    const user = useSelector(getUser);
+    const {
+        isCheckingToken,
+        isUserLoggedIn,
+        user
+    } = useSelector(getAuth);
 
     const [activeKey, setActiveKeys] = useState<string[]>(() => {
         const names = pathname.split('/')
@@ -36,8 +39,8 @@ export function Footer() {
 
         const selectedPage = names.length ? names[names.length - 1] : '';
         let defaultRoute = selectedPage;
-        if (!selectedPage) {
-            defaultRoute = (user.ownerId ? '/granted-accesses' : '/user-profile');
+        if (!selectedPage && !isCheckingToken && isUserLoggedIn) {
+            defaultRoute = user.ownerId ? '/granted-accesses' : '/user-profile';
         }
 
         console.log(`%c Sel page from pathname: [${selectedPage}], default route: [${defaultRoute}]`, 'color: red;');
@@ -59,6 +62,7 @@ export function Footer() {
         const selectedRoute = grantedNavigation.find(({ key }) => key === pathname);
         if (selectedRoute) {
             setActiveKeys([selectedRoute.key as string]);
+            // navigate(key);
         }
     }, [pathname, grantedNavigation.length]);
 

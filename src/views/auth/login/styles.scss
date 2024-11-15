@@ -9,45 +9,57 @@ $error-red-dark: rgba(224, 51, 51, 0.25);
   align-items: center;
   justify-content: center;
 
-  .ant-card {
-    .ant-card-body {
-      width: 340px;
+  .card-container {
+    padding-bottom: 2em;
 
-      .ant-input-affix-wrapper,
-      .ant-skeleton.ant-skeleton-element {
-        &:not(:first-child) {
-          margin-top: 1em;
-        }
+    .ant-card {
+      .ant-card-head {
+        border-bottom: 0;
+        padding-top: 1em;
+      }
+      .ant-card-body {
+        padding: 1em;
+        padding-top: 0.5em;
+        width: 300px;
+
+        .ant-input-affix-wrapper,
+        .ant-skeleton.ant-skeleton-element {
+          &:not(:first-child) {
+            margin-top: 1em;
+          }
 
 
-        .ant-input-prefix {
-          .anticon {
-            color: rgba(0, 0, 0, .25);
+          .ant-input-prefix {
+            .anticon {
+              color: rgba(0, 0, 0, .25);
+            }
           }
         }
+
       }
 
-    }
 
-
-    .ant-skeleton {
-      width: 100%;
-
-      .ant-skeleton-input {
+      .ant-skeleton {
         width: 100%;
+
+        .ant-skeleton-input {
+          width: 100%;
+        }
       }
-    }
 
 
-    .login-button-container {
-      margin-top: 2em;
-      text-align: center;
+      .login-button-container {
+        margin-top: 2em;
+        text-align: center;
 
-      .ant-btn,
-      .ant-skeleton-button {
-        width: 76px;
+        .ant-btn,
+        .ant-skeleton-button {
+          width: 76px;
+        }
       }
     }
   }
+
+
 }
 

@@ -8,20 +8,25 @@ import { IUserData } from 'utils/types';
 
 import { loadUserProfile } from './services';
 
-const onSuccessLoadUser = (userData: UserResponse & IUserData, dispatch: any) => {
+const onSuccessLoadUser = (userData: UserResponse & IUserData, dispatch: any, onFinish?: (user: IUserData) => void) => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { access_token } = userData;
     axios.defaults.headers.Authorization = access_token ? `Bearer ${access_token}` : '';
     axios.interceptors.response.use((response) => response, (resp) => axiosNotAuthorizedInterceptor(resp, dispatch));
-    dispatch(loginSuccess({
+    const fullUserData: IUserData = {
         ...userData,
         roles: userData.role?.roleCode ? [userData.role?.roleCode as EnumUserRequestRole] : [],
         isAdmin: userData.role?.roleCode === EnumUserRequestRole.STAFF_ADMIN,
         isSuperAdmin: userData.role?.roleCode === EnumUserRequestRole.SUPER_ADMIN
-    }));
+    };
+    dispatch(loginSuccess(fullUserData));
+
+    if (onFinish) {
+        onFinish(fullUserData);
+    }
 };
 
-export const getUserData = (authData: IUserData, dispatch: any) => {
+export const getUserData = (authData: IUserData, dispatch: any, onFinish?: (user: IUserData) => void) => {
     const {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         access_token = '',
@@ -43,7 +48,7 @@ export const getUserData = (authData: IUserData, dispatch: any) => {
                 userColor: stc(userProfile?.name || '')
             };
 
-            onSuccessLoadUser(resultUser, dispatch);
+            onSuccessLoadUser(resultUser, dispatch, onFinish);
         }
     });
 };

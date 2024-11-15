@@ -81,43 +81,46 @@ function Login() {
 
     return (
         <div className="view login">
-            <Card
-              title="Вход"
-              onKeyDown={onLoginFormClick}
-            >
-                {isLoggingIn ? <Skeleton.Input active /> : (
-                    <Input
-                      placeholder="Email"
-                      className={!formValidState.email ? 'invalid' : ''}
-                      value={credentials.email}
-                      onChange={onChangeEmail}
-                      prefix={<UserOutlined />}
-                    />
-                )}
-
-                {isLoggingIn ? <Skeleton.Input active /> : (
-                    <Input
-                      placeholder="Пароль"
-                      className={!formValidState.password ? 'invalid' : ''}
-                      type="password"
-                      value={credentials.password}
-                      onChange={onChangePassword}
-                      prefix={<LockOutlined />}
-                    />
-                )}
-                <div className="login-button-container">
-                    {isLoggingIn ? <Skeleton.Button active /> : (
-                        <Button
-                          disabled={!formValidState.email || !formValidState.password}
-                          type="primary"
-                          onClick={loginCallback}
-                        >
-                            Войти
-                        </Button>
+            <div className="card-container">
+                <Card
+                  title="Вход"
+                  bordered={false}
+                  onKeyDown={onLoginFormClick}
+                >
+                    {isLoggingIn ? <Skeleton.Input active /> : (
+                        <Input
+                          placeholder="Email"
+                          className={!formValidState.email ? 'invalid' : ''}
+                          value={credentials.email}
+                          onChange={onChangeEmail}
+                          prefix={<UserOutlined />}
+                        />
                     )}
 
-                </div>
-            </Card>
+                    {isLoggingIn ? <Skeleton.Input active /> : (
+                        <Input
+                          placeholder="Пароль"
+                          className={!formValidState.password ? 'invalid' : ''}
+                          type="password"
+                          value={credentials.password}
+                          onChange={onChangePassword}
+                          prefix={<LockOutlined />}
+                        />
+                    )}
+                    <div className="login-button-container">
+                        {isLoggingIn ? <Skeleton.Button active /> : (
+                            <Button
+                              disabled={!formValidState.email || !formValidState.password}
+                              type="primary"
+                              onClick={loginCallback}
+                            >
+                                Войти
+                            </Button>
+                        )}
+
+                    </div>
+                </Card>
+            </div>
         </div>
     );
 }
