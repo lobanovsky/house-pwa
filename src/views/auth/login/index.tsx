@@ -1,19 +1,22 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { Button, Card, Input, Skeleton } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthorizationService, LoginRequest } from 'backend';
 import { loginStarted } from 'store/auth/reducer';
+import { getAuth } from 'store/auth/selectors';
 import { EmailRegex } from 'utils/constants';
 import { showError } from 'utils/notifications';
 import { AuthData, IUserData, ServerError } from 'utils/types';
-
 import { getUserData } from './helpers';
 import './styles.scss';
 
 function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const authState = useSelector(getAuth);
     const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
     const [credentials, setCredentials] = useState<LoginRequest>({
         email: '',
@@ -43,9 +46,8 @@ function Login() {
         }
         setIsLoggingIn(true);
         doLogin(credentials, (isSuccess: boolean, loginData: AuthData | ServerError) => {
-            // setIsLoggingIn(false);
             if (isSuccess) {
-                getUserData(loginData as IUserData, dispatch);
+                getUserData(loginData as IUserData, navigate);
             } else {
                 setIsLoggingIn(false);
                 const serverError = loginData as ServerError;
@@ -78,6 +80,13 @@ function Login() {
             loginCallback();
         }
     }, [loginCallback]);
+
+    if (authState.isUserLoggedIn) {
+        console.log('%c Open login with logged user', 'color: magenta');
+        //  const { path } = getUserDefaultPage(authState.user, '/login');
+        //  console.log(`%c User logged in, so Login => ${path} `, 'color: magenta');
+        // return <Navigate to={path} />;
+    }
 
     return (
         <div className="view login">

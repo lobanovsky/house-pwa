@@ -19,7 +19,7 @@ export function HouseHeader() {
     const dispatch = useDispatch();
 
     // Не показываем хедер, Если мы в профиле у себя
-    if (location.pathname.endsWith('/user-profile')) {
+    if (location.pathname.endsWith('/profile')) {
         return <span />;
     }
 

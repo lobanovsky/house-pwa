@@ -1,5 +1,6 @@
 import React from 'react';
 import { EnumUserRequestRole } from 'backend';
+import { PathRouteProps } from 'react-router/dist/lib/components';
 import { IUserData } from '../utils/types';
 
 export interface RouteConfig {
@@ -7,6 +8,10 @@ export interface RouteConfig {
   title: string;
   roles?: EnumUserRequestRole[],
   component?: React.ReactNode;
+}
+
+export interface PrivateRouteProps extends PathRouteProps {
+  roles?: EnumUserRequestRole[]
 }
 
 export interface NavigationItemConfig {

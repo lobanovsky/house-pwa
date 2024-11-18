@@ -9,6 +9,7 @@ import { NavigationItems } from 'navigation/navigation';
 import { createNavigationForUser } from 'navigation/utils';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
+import { getUserDefaultPage } from '../../views/auth/login/helpers';
 
 const AppMenuItems: MenuItemType[] = NavigationItems
     .filter(({ hideInMenu = false }) => !hideInMenu)
@@ -34,17 +35,9 @@ export function Footer() {
     } = useSelector(getAuth);
 
     const [activeKey, setActiveKeys] = useState<string[]>(() => {
-        const names = pathname.split('/')
-            .filter((path) => !!path);
-
-        const selectedPage = names.length ? names[names.length - 1] : '';
-        let defaultRoute = selectedPage;
-        if (!selectedPage && !isCheckingToken && isUserLoggedIn) {
-            defaultRoute = user.ownerId ? '/granted-accesses' : '/user-profile';
-        }
-
-        console.log(`%c Sel page from pathname: [${selectedPage}], default route: [${defaultRoute}]`, 'color: red;');
-        return [`/${defaultRoute}`];
+        const { path: defaultPage } = getUserDefaultPage(user, pathname);
+        console.log(`%c FOOTER: Sel page from pathname: [${defaultPage}], pathname [${pathname}]`, 'color: purple;');
+        return [defaultPage];
     });
 
     const grantedNavigation = useMemo<MenuItemType[]>(
