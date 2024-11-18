@@ -17,18 +17,18 @@ export const NavigationItems: NavigationMenuItemType[] = [
         roles: [EnumUserRequestRole.USER],
         availableForUser: (user) => !!user.ownerId
     },
-    {
-        key: '/counters',
-        icon: <DashboardOutlined />,
-        title: 'Счётчики',
-        component: <Counters />,
-    },
-    {
-        key: '/orders',
-        icon: <OrderedListOutlined />,
-        title: 'Заявки',
-        component: <Orders />,
-    },
+    // {
+    //     key: '/counters',
+    //     icon: <DashboardOutlined />,
+    //     title: 'Счётчики',
+    //     component: <Counters />,
+    // },
+    // {
+    //     key: '/orders',
+    //     icon: <OrderedListOutlined />,
+    //     title: 'Заявки',
+    //     component: <Orders />,
+    // },
     {
         key: '/profile',
         icon: <UserOutlined />,

@@ -39,20 +39,6 @@ function App() {
             <AppProvider>
                 <NotificationsProvider />
                 <Layout>
-                    {isUserLoggedIn && (
-                        <Button
-                          danger
-                          type="text"
-                          size="small"
-                          onClick={() => {
-                                dispatch(logout());
-                            }}
-                        >
-                            <LogoutIcon />
-                        </Button>
-                    )}
-
-                    {/* {isAd && <HouseHeader />} */}
                     <Layout.Content><AppRoutes /></Layout.Content>
                     {isUserLoggedIn && !isCheckingToken && <Footer />}
                 </Layout>
