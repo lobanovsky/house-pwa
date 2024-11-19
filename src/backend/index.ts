@@ -3112,6 +3112,7 @@ export enum EnumUserRequestRole {
   'SUPER_ADMIN' = 'SUPER_ADMIN',
   'STAFF_ADMIN' = 'STAFF_ADMIN',
   'STAFF_READ_ONLY' = 'STAFF_READ_ONLY',
+  'STAFF_OPERATOR' = 'STAFF_OPERATOR',
   'USER' = 'USER'
 }
 export enum EnumRoomFilterType {

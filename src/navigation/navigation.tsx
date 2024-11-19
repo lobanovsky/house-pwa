@@ -15,14 +15,13 @@ export const NavigationItems: NavigationMenuItemType[] = [
         title: 'Доступы',
         component: <GrantedAccesses />,
         roles: [EnumUserRequestRole.USER],
-        // availableForUser: (user) => !!user.ownerId
+        availableForUser: (user) => !!user.ownerId
     },
     {
         key: '/car-search',
         icon: <CarIcon />,
         title: 'Авто',
-        // todo заменить роль
-        roles: [EnumUserRequestRole.USER],
+        roles: [EnumUserRequestRole.STAFF_OPERATOR],
         component: <CarSearch />,
     },
     {
@@ -34,6 +33,7 @@ export const NavigationItems: NavigationMenuItemType[] = [
             EnumUserRequestRole.USER,
             EnumUserRequestRole.SUPER_ADMIN,
             EnumUserRequestRole.STAFF_ADMIN,
+            EnumUserRequestRole.STAFF_OPERATOR,
             EnumUserRequestRole.STAFF_READ_ONLY
         ]
     },
