@@ -41,7 +41,7 @@ function App() {
             dispatch(logout());
         }
 
-        resizeInterval = setInterval(() => {
+        resizeInterval = setTimeout(() => {
             window.scrollTo({
                 top: 0
             });
@@ -52,7 +52,7 @@ function App() {
 
         return () => {
             // @ts-ignore
-            clearInterval(resizeInterval);
+            clearTimeout(resizeInterval);
             window.removeEventListener('resize', updateAppHeight);
         };
     }, []);
