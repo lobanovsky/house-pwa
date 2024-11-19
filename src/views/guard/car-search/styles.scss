@@ -6,6 +6,8 @@
   .content {
     display: inline-block;
     max-width: 600px;
+      max-height: 100%;
+      overflow-y: auto;
   }
 
   //max-width: 600px;
@@ -15,8 +17,7 @@
   }
 
   .search-form {
-    //max-width: 600px;
-    //min-width: 360px;
+    padding-top: 0.5em;
     display: flex;
     align-items: center;
     gap: 1em;

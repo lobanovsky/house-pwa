@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
-import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Button, Popconfirm, Spin, Typography } from 'antd';
-import { LoadingOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
+
+import { LogoutIcon } from 'icons/logout';
+import { logout } from 'store/auth/reducer';
 import { getUser } from 'store/auth/selectors';
 import { getUserProperty } from 'store/property/selectors';
-import './styles.scss';
 import { PropertyItem } from './property-item';
-import { logout } from '../../../store/auth/reducer';
-import { LogoutIcon } from '../../../icons/logout';
+import './styles.scss';
+import { UserIconByRole } from './constants';
+import { EnumUserRequestRole } from '../../../backend';
 
 export function UserProfile() {
     const user = useSelector(getUser);
@@ -38,7 +40,9 @@ export function UserProfile() {
                     </Popconfirm>
                 </div>
                 <div className="user-info">
-                    <Avatar size="large" style={{ backgroundColor: user.userColor }}><UserOutlined /></Avatar>
+                    <Avatar size="large" style={{ backgroundColor: user.userColor }}>
+                        {UserIconByRole[user.roles[0]] || <UserOutlined />}
+                    </Avatar>
                     <div className="user-name">
                         <Typography.Title level={4}>{user.name}</Typography.Title>
                     </div>

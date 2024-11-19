@@ -1,12 +1,12 @@
 import React from 'react';
-import { UserOutlined, DashboardOutlined, OrderedListOutlined } from '@ant-design/icons';
-import { UserProfile } from '../views/user/profile';
+import { UserProfile } from '../views/auth/profile';
 import { GrantedAccesses } from '../views/user/accesses';
 import { EnumUserRequestRole } from '../backend';
 import { NavigationMenuItemType } from './types';
 import { GateIcon } from '../icons/gate';
-import { Counters } from '../views/user/counters';
-import { Orders } from '../views/user/orders';
+import { CarSearch } from '../views/guard/car-search';
+import { CarIcon } from '../icons/car';
+import { UserFilledIcon } from '../icons/user-filled';
 
 export const NavigationItems: NavigationMenuItemType[] = [
     {
@@ -15,23 +15,19 @@ export const NavigationItems: NavigationMenuItemType[] = [
         title: 'Доступы',
         component: <GrantedAccesses />,
         roles: [EnumUserRequestRole.USER],
-        availableForUser: (user) => !!user.ownerId
+        // availableForUser: (user) => !!user.ownerId
     },
-    // {
-    //     key: '/counters',
-    //     icon: <DashboardOutlined />,
-    //     title: 'Счётчики',
-    //     component: <Counters />,
-    // },
-    // {
-    //     key: '/orders',
-    //     icon: <OrderedListOutlined />,
-    //     title: 'Заявки',
-    //     component: <Orders />,
-    // },
+    {
+        key: '/car-search',
+        icon: <CarIcon />,
+        title: 'Авто',
+        // todo заменить роль
+        roles: [EnumUserRequestRole.USER],
+        component: <CarSearch />,
+    },
     {
         key: '/profile',
-        icon: <UserOutlined />,
+        icon: <UserFilledIcon />,
         title: 'Профиль',
         component: <UserProfile />,
         roles: [

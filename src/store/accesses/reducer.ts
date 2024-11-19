@@ -4,11 +4,7 @@ import { createSlice, PayloadAction, SliceCaseReducers, } from '@reduxjs/toolkit
 import { AccessResponse } from 'backend';
 
 import { LoadingState } from 'store/types';
-import dayjs from 'dayjs';
 import { loadAccessesThunk } from './thunks';
-
-const getRandomId = () => dayjs()
-    .unix() + Math.round(Math.random() * 10000) + Math.round(Math.random() * 100);
 
 export type AccessStoreState = LoadingState<AccessResponse[]>;
 // @ts-ignore
@@ -21,12 +17,15 @@ const accessSlice = createSlice<AccessStoreState, SliceCaseReducers<AccessStoreS
     reducers: {
         accessChanged: () => {
         },
-        ownerChanged: (state: AccessStoreState, { payload: ownerId }: PayloadAction<number>) => {
+        accessesLoaded: (state: AccessStoreState, { payload: accesses }: PayloadAction<AccessResponse[]>) => {
+            state.data = accesses;
+        },
+        ownerChanged: () => {
         },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loadAccessesThunk.pending, (state, action) => {
+            .addCase(loadAccessesThunk.pending, (state) => {
                 // eslint-disable-next-line no-param-reassign
                 state.isLoading = true;
             })
@@ -34,14 +33,14 @@ const accessSlice = createSlice<AccessStoreState, SliceCaseReducers<AccessStoreS
                 state.isLoading = false;
                 state.data = payload;
             })
-            .addCase(loadAccessesThunk.rejected, (state, action) => {
+            .addCase(loadAccessesThunk.rejected, (state) => {
                 state.isLoading = false;
             });
     }
 });
 
 export const {
-    accessChanged,
+    accessesLoaded,
     ownerChanged
 } = accessSlice.actions;
 

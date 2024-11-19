@@ -14,7 +14,26 @@ $copyrightHeight: 40px;
       .ant-avatar {
         width: 64px;
         height: 64px;
-        font-size: 22px;
+        font-size: 32px;
+        line-height: 32px;
+
+        .anticon {
+          &.god-icon {
+            font-size: 38px;
+            line-height: 38px;
+          }
+
+          &.staff-icon {
+            font-size: 38px;
+            line-height: 38px;
+          }
+
+          &.guard-icon {
+            font-size: 36px;
+            margin-top: 4px;
+            line-height: 36px;
+          }
+        }
       }
 
       .user-name {
@@ -42,10 +61,10 @@ $copyrightHeight: 40px;
       line-height: 22px;
 
       .ant-btn {
-        font-size: 20px;
-        height: 22px;
-        width: 22px;
-        line-height: 22px;
+        font-size: 22px;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
       }
     }
 

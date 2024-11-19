@@ -1,5 +1,5 @@
 import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
-import { ownerChanged } from './reducer';
+import { accessesLoaded, ownerChanged } from './reducer';
 import { loadAccessesThunk } from './thunks';
 import { loginSuccess } from '../auth/reducer';
 
@@ -10,6 +10,8 @@ accessMiddleware.startListening({
     effect: async ({ payload: user }: any, listenerApi: any) => {
         if (user.ownerId) {
             listenerApi.dispatch(loadAccessesThunk(user.ownerId));
+        } else {
+            listenerApi.dispatch(accessesLoaded([]));
         }
     }
 });

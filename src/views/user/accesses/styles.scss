@@ -1,5 +1,5 @@
 .view.granted-accesses {
-  padding: 0.5em 0 0.5em 0 !important;
+  //padding: 0.5em 0 0.5em 0 !important;
 
   .content {
     display: flex;
@@ -21,6 +21,14 @@
       //flex: 1 1 auto;
       //min-height: 0;
       overflow-y: auto;
+
+      &.empty {
+        .empty-placeholder {
+          padding: 2em;
+        }
+      }
+
+
     }
 
 

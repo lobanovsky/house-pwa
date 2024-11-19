@@ -61,7 +61,7 @@ export function CarSearch() {
     return (
         <div className="cars-search view centered-content">
             <div className="content">
-                <Typography.Title level={4}>Поиск авто</Typography.Title>
+                <Typography.Title level={3}>Поиск авто</Typography.Title>
                 <div className="search-form">
                     <Input
                       size="large"
