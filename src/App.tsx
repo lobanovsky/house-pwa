@@ -62,14 +62,8 @@ function App() {
 
             <AppProvider>
                 <NotificationsProvider />
-                <Layout>
+                <Layout style={{ height: appHeight }}>
                     <Layout.Content>
-                        <div style={{ color: 'red', padding: 10 }}>
-height:
-{appHeight}
-{' '}
-px
-                        </div>
                         <AppRoutes />
                     </Layout.Content>
                     {isUserLoggedIn && !isCheckingToken && <Footer />}

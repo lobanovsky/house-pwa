@@ -29,14 +29,11 @@ export function Footer() {
     const navigate = useNavigate();
     const { pathname = '' } = useLocation();
     const {
-        isCheckingToken,
-        isUserLoggedIn,
         user
     } = useSelector(getAuth);
 
     const [activeKey, setActiveKeys] = useState<string[]>(() => {
         const { path: defaultPage } = getUserDefaultPage(user, pathname);
-        console.log(`%c FOOTER: Sel page from pathname: [${defaultPage}], pathname [${pathname}]`, 'color: purple;');
         return [defaultPage];
     });
 
