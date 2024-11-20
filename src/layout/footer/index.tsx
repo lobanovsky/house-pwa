@@ -4,26 +4,11 @@ import { useSelector } from 'react-redux';
 import { Layout, Menu, MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { MenuItemType } from 'antd/es/menu/interface';
-
 import { NavigationItems } from 'navigation/navigation';
 import { createNavigationForUser } from 'navigation/utils';
 import { getAuth } from 'store/auth/selectors';
+import { getUserDefaultPage } from 'views/auth/login/helpers';
 import './styles.scss';
-import { getUserDefaultPage } from '../../views/auth/login/helpers';
-
-const AppMenuItems: MenuItemType[] = NavigationItems
-    .filter(({ hideInMenu = false }) => !hideInMenu)
-    .map(
-        ({
-             component,
-             roles,
-             hideInMenu,
-             ...menuItemConfig
-         }) => ({
-            ...menuItemConfig,
-            label: menuItemConfig.title
-        })
-    );
 
 export function Footer() {
     const navigate = useNavigate();
@@ -39,8 +24,23 @@ export function Footer() {
 
     const grantedNavigation = useMemo<MenuItemType[]>(
         // @ts-ignore
-        () => (!(user.roles || []).length ? [] : createNavigationForUser(AppMenuItems, user)),
-        [user.roles.length]
+        () => {
+            // @ts-ignore
+            const navigation = (!(user.roles || []).length ? [] : createNavigationForUser(NavigationItems, user));
+
+            return navigation.map(
+                    ({
+                         component,
+                         roles,
+                         hideInMenu,
+                         ...menuItemConfig
+                     }) => ({
+                        ...menuItemConfig,
+                        label: menuItemConfig.title
+                    })
+                );
+        },
+        [user.roles.join(','), user.id]
     );
 
     const onMenuItemClick: MenuProps['onClick'] = useCallback(({ key }: MenuInfo) => {

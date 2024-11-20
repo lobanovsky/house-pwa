@@ -29,38 +29,16 @@ export const userHasPermissions = (roles: EnumUserRequestRole[], userRoles: Enum
     || userRoles.includes(EnumUserRequestRole.SUPER_ADMIN)
     || roles.some((requiredRole) => userRoles.includes(requiredRole));
 
-// eslint-disable-next-line max-len
-const isAvailableNavigationItem = ({
-                                       roles = [],
-                                       availableForUser
-                                   }: NavigationMenuItemType, user: IUserData) => (
-    !availableForUser || availableForUser(user)) && userHasPermissions(roles, user.roles);
+const isAvailableNavigationItem = (menuItemConfig: NavigationMenuItemType, user: IUserData) => {
+    const {
+        roles = [],
+        availableForUser
+    } = menuItemConfig;
 
-export const createNavigationForUser = (navigationItems: NavigationType, user: IUserData): NavigationType => {
-    const result: NavigationType = [];
-
-    navigationItems.forEach((menuItem) => {
-        if (Array.isArray(menuItem.children)) {
-            const grantedChildren: NavigationMenuItemType[] = menuItem.children
-                .filter((childMenuItem) => isAvailableNavigationItem(childMenuItem, user));
-
-            if (grantedChildren.length) {
-                result.push({
-                    ...menuItem,
-                    children: grantedChildren.map(({
-                                                       availableForUser,
-                                                       ...menuItemConfig
-                                                   }) => menuItemConfig)
-                });
-            }
-        } else if (isAvailableNavigationItem(menuItem, user)) {
-            const {
-                availableForUser,
-                ...menuItemConfig
-            } = menuItem;
-            result.push(menuItemConfig);
-        }
-    });
-
-    return result;
+    const hasRoles = userHasPermissions(roles, user.roles);
+    return (!availableForUser || availableForUser(user)) && hasRoles;
 };
+
+export const createNavigationForUser = (navigationItems: NavigationType, user: IUserData): NavigationType => navigationItems.filter(
+    (menuItem) => isAvailableNavigationItem(menuItem, user)
+);

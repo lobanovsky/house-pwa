@@ -8,9 +8,19 @@ import store from 'store';
 import { EMPTY_USER, loginSuccess, logout } from 'store/auth/reducer';
 import { IUserData } from 'utils/types';
 import { loadUserProfile } from './services';
+import { createNavigationForUser } from '../../../navigation/utils';
 
 export const getUserDefaultPage = (user: IUserData, pathname?: string) => {
-    const defaultPage = user.ownerId ? '/accesses' : '/profile';
+    const gratedNavigation = createNavigationForUser(NavigationItems, user);
+    let defaultPage = user.ownerId ? '/accesses'
+        : '/profile';
+
+    // Если у юзера нет собственности, то ищем любой другой пункт меню, кроме профиля
+    if (gratedNavigation.length > 1 && !user.ownerId) {
+        const firstNonProfileItem = gratedNavigation.find(({ key }) => key !== '/profile');
+        defaultPage = firstNonProfileItem?.key as string || '/profile';
+    }
+
     const isEmptyRoute = !pathname || !NavigationItems.find(({ key: path }) => path === pathname);
     const pathToRedirect = isEmptyRoute ? defaultPage : pathname;
 
