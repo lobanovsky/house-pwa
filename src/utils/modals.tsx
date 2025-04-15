@@ -15,6 +15,7 @@ export const showModal = ({ className = '', getContent, ...modalProps }: InfoMod
   };
 
   modalCmp = modal.info({
+    // @ts-ignore
     width: 800,
     className: `app-static-modal ${className}`,
     ...modalProps,
